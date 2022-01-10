@@ -18,134 +18,27 @@ info:
 tags:
   - name: products
     description: Operations for add update or delete products
-  - name: customer-order
+  - name: orders
     description: Operations for add update or delete customer orders
 paths:
-  /getAllProducts:
-    get:
+  /createOrder/{customerId}:
+    post:
       tags:
-        - products
-      summary: get all products
+        - orders
+      summary: create Order
       description: |
-        you can fetch all the available orders
-      responses:
-        '200':
-          description: search results matching criteria
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Product'
-        '400':
-          description: bad input parameter
-          
-  /getProductByProductId/{productId}:
-    get:
-      tags:
-        - products
-      summary: get Product By productId
-      description: |
-        you can fetch Order By ProductId
-        
-      # Path Param
+        create Order
       parameters:
-      -  name: productId
+      -  name: customerId
          in: path
          required: true
          schema:
-            type: integer
-      responses:
-        '200':
-          description: search results matching criteria
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Product'
-        '400':
-          description: bad input parameter
-          
-  /addProduct:
-    post:
-      tags:
-        - products
-      summary: add Product
-      description: |
-        you can add Product
+            type: integer  
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Product'
-        description: Product to add  
-      responses:
-        '201':
-          description: Product created
-        '400':
-          description: 'invalid input, object invalid'
-        '409':
-          description: Product already exists
-          
-  /updateProduct:
-    put:
-      tags:
-        - products
-      summary: update Product
-      description: |
-        you can update Product
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Product'
-        description: Product to update  
-      responses:
-        '201':
-          description: Product updated
-        '400':
-          description: 'invalid input, object invalid'
-          
-  /deleteProduct/{productId}:
-    delete:
-      tags:
-        - products
-      summary: delete Product By ProductId
-      description: |
-        you can delete Product by ProductId
-        
-      # Path Param
-      parameters:
-      -  name: productId
-         in: path
-         required: true
-         schema:
-            type: integer
-      responses:
-        '200':
-          description: product deleted successfully
-          content:
-            application/json:
-              schema:
-                type: object
-                items:
-                  $ref: '#/components/schemas/Product'
-        '400':
-          description: bad input parameter
-  
-  /addCustomerOrder:
-    post:
-      tags:
-        - customer-order
-      summary: add Customer Order
-      description: |
-        you can add Customer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Customer'
+              $ref: '#/components/schemas/OrderDetails'
         description: Customer Order to add  
       responses:
         '201':
@@ -155,49 +48,47 @@ paths:
         '409':
           description: Customer Order already exists
           
-  /updateCustomerOrder:
-    put:
+  /getOrder/{orderId}:
+    get:
       tags:
-        - customer-order
-      summary: update Customer order
+        - orders
+      summary: get customer By orderId
       description: |
-        you can update Customer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Customer'
-        description: Customer to update  
-      responses:
-        '201':
-          description: Customer updated
-        '400':
-          description: 'invalid input, object invalid'
-          
-  /deleteCustomerOrder/{customerId}:
-    delete:
-      tags:
-        - customer-order
-      summary: delete customer By ProductId
-      description: |
-        you can delete customer by customerId
+        you can delete customer by orderId
         
       # Path Param
       parameters:
-      -  name: customerId
+      -  name: orderId
          in: path
          required: true
          schema:
             type: integer
       responses:
         '200':
-          description: customer deleted successfully
+          description: search results matching criteria
           content:
             application/json:
               schema:
-                type: object
-                items:
-                  $ref: '#/components/schemas/Customer'
+                  $ref: '#/components/schemas/Order'
+          
+  /deleteOrder/{orderId}:
+    delete:
+      tags:
+        - orders
+      summary: delete customer By orderId
+      description: |
+        you can delete customer by orderId
+        
+      # Path Param
+      parameters:
+      -  name: orderId
+         in: path
+         required: true
+         schema:
+            type: integer
+      responses:
+        '200':
+          description: Order deleted
         '400':
           description: bad input parameter        
 components:
@@ -249,7 +140,9 @@ components:
         customerId:
             $ref: '#/components/schemas/Customer'
         orderProductId:
-           $ref: '#/components/schemas/OrderProduct'
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
         orderValue:
           type: number
         orderStatus:
@@ -269,4 +162,11 @@ components:
           type: string
           description: Start date
           example: "2017-01-01"
-          format: date  
+          format: date
+    OrderDetails:
+      type: object
+      properties:
+        products:
+          type: array
+          items: 
+            $ref: '#/components/schemas/Product'
