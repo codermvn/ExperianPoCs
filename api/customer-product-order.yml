@@ -1,0 +1,272 @@
+openapi: 3.0.0
+servers:
+  # Added by API Auto Mocking Plugin
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/self7648/Order-Customer-Product/1.0.0
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/self7648/Order-Customer/1.0.0
+info:
+  description: This is a simple API
+  version: "1.0.0"
+  title: Simple Inventory API
+  contact:
+    email: you@your-company.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: products
+    description: Operations for add update or delete products
+  - name: customer-order
+    description: Operations for add update or delete customer orders
+paths:
+  /getAllProducts:
+    get:
+      tags:
+        - products
+      summary: get all products
+      description: |
+        you can fetch all the available orders
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        '400':
+          description: bad input parameter
+          
+  /getProductByProductId/{productId}:
+    get:
+      tags:
+        - products
+      summary: get Product By productId
+      description: |
+        you can fetch Order By ProductId
+        
+      # Path Param
+      parameters:
+      -  name: productId
+         in: path
+         required: true
+         schema:
+            type: integer
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        '400':
+          description: bad input parameter
+          
+  /addProduct:
+    post:
+      tags:
+        - products
+      summary: add Product
+      description: |
+        you can add Product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+        description: Product to add  
+      responses:
+        '201':
+          description: Product created
+        '400':
+          description: 'invalid input, object invalid'
+        '409':
+          description: Product already exists
+          
+  /updateProduct:
+    put:
+      tags:
+        - products
+      summary: update Product
+      description: |
+        you can update Product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+        description: Product to update  
+      responses:
+        '201':
+          description: Product updated
+        '400':
+          description: 'invalid input, object invalid'
+          
+  /deleteProduct/{productId}:
+    delete:
+      tags:
+        - products
+      summary: delete Product By ProductId
+      description: |
+        you can delete Product by ProductId
+        
+      # Path Param
+      parameters:
+      -  name: productId
+         in: path
+         required: true
+         schema:
+            type: integer
+      responses:
+        '200':
+          description: product deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Product'
+        '400':
+          description: bad input parameter
+  
+  /addCustomerOrder:
+    post:
+      tags:
+        - customer-order
+      summary: add Customer Order
+      description: |
+        you can add Customer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+        description: Customer Order to add  
+      responses:
+        '201':
+          description: Customer Order added
+        '400':
+          description: 'invalid input, object invalid'
+        '409':
+          description: Customer Order already exists
+          
+  /updateCustomerOrder:
+    put:
+      tags:
+        - customer-order
+      summary: update Customer order
+      description: |
+        you can update Customer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+        description: Customer to update  
+      responses:
+        '201':
+          description: Customer updated
+        '400':
+          description: 'invalid input, object invalid'
+          
+  /deleteCustomerOrder/{customerId}:
+    delete:
+      tags:
+        - customer-order
+      summary: delete customer By ProductId
+      description: |
+        you can delete customer by customerId
+        
+      # Path Param
+      parameters:
+      -  name: customerId
+         in: path
+         required: true
+         schema:
+            type: integer
+      responses:
+        '200':
+          description: customer deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Customer'
+        '400':
+          description: bad input parameter        
+components:
+  schemas:
+    Product:
+      type: object
+      required:
+        - productId
+        - productName
+        - productPrice
+        - company
+        - inventory
+      properties:
+        productId:
+          type: integer
+        productName:
+          type: string
+          example: Widget Adapter
+        productPrice:
+          type: number
+        company:
+          type: string  
+        inventory:
+          type: integer
+    Customer:
+      required:
+        - customerId
+      properties:
+        customerId:
+          type: integer
+        customerName:
+          type: string
+        modeOfPayment:
+          type: string  
+          example: Mainak
+        debitAvailable:
+          type: number
+        customerAddress:
+          type: string
+        status:
+          type: string
+    Order:
+      type: object
+      required:
+        - orderId
+      properties:
+        orderId:
+          type: integer
+        customerId:
+            $ref: '#/components/schemas/Customer'
+        orderProductId:
+           $ref: '#/components/schemas/OrderProduct'
+        orderValue:
+          type: number
+        orderStatus:
+          type: string
+    OrderProduct:
+      type: object
+      required:
+        - orderProductId
+      properties:
+        orderProductId:
+          type: integer
+        productId:
+          $ref: '#/components/schemas/Product'
+        quantity:
+          type: integer
+        date:  
+          type: string
+          description: Start date
+          example: "2017-01-01"
+          format: date  
