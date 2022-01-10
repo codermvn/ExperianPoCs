@@ -104,14 +104,14 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Customer'
-        description: Customer Order to add  
+        description: Customer to add  
       responses:
         '200':
-          description: Customer Order added
+          description: Customer added
         '400':
           description: invalid input, object invalid
         '409':
-          description: Customer Order already exists
+          description: Customer already exists
           
   /getCustomer/{customerId}:
     get:
