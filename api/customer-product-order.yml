@@ -16,8 +16,8 @@ info:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 tags:
-  - name: products
-    description: Operations for add update or delete products
+  - name: customers
+    description: Operations for add update or delete customers
   - name: orders
     description: Operations for add update or delete customer orders
 paths:
@@ -90,7 +90,103 @@ paths:
         '200':
           description: Order deleted
         '400':
-          description: bad input parameter        
+          description: bad input parameter
+          
+  /createCustomer:
+    post:
+      tags:
+        - customers
+      summary: create customer
+      description: |
+        create customer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+        description: Customer Order to add  
+      responses:
+        '200':
+          description: Customer Order added
+        '400':
+          description: invalid input, object invalid
+        '409':
+          description: Customer Order already exists
+          
+  /getCustomer/{customerId}:
+    get:
+      tags:
+        - customers
+      summary: get customer By customerId
+      description: |
+        you can get customer by customerId
+        
+      # Path Param
+      parameters:
+      -  name: customerId
+         in: path
+         required: true
+         schema:
+            type: integer
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/Order'
+        '404':
+          description: bad input parameter
+  /debit/{customerId}:
+    post:
+      tags:
+        - customers
+      summary: debit amount
+      description: |
+        debit amount
+      # Path Param
+      parameters:
+      -  name: customerId
+         in: path
+         required: true
+         schema:
+            type: integer  
+      requestBody:
+        content:
+          application/json:
+            schema:
+                  $ref: '#/components/schemas/Amount'
+        description: amount to be debited  
+      responses:
+        '200':
+          description: amount debited
+        '400':
+          description: invalid input, object invalid 
+  /credit/{customerId}:
+    post:
+      tags:
+        - customers
+      summary: credit amount
+      description: |
+        credit amount
+      # Path Param
+      parameters:
+      -  name: customerId
+         in: path
+         required: true
+         schema:
+            type: integer  
+      requestBody:
+        content:
+          application/json:
+            schema:
+                  $ref: '#/components/schemas/Amount'
+        description: amount to be credited  
+      responses:
+        '200':
+          description: amount credited
+        '400':
+          description: invalid input, object invalid        
 components:
   schemas:
     Product:
@@ -170,3 +266,8 @@ components:
           type: array
           items: 
             $ref: '#/components/schemas/Product'
+    Amount:
+      type: object
+      properties:
+        value:
+          type: number        
