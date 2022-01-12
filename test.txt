@@ -36,4 +36,38 @@ and also
 			
 next step: -> build the generated project. -> 
 create a new maven project add this project dependency. create controller 
-and implement the generated controller interface.				
+and implement the generated controller interface.
+
+
+For DB Model add below
+
+<dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>javax.persistence-api</artifactId>
+            <version>2.2</version>
+        </dependency>
+        
+        
+        
+Customer Class
+=============
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+/**
+ * Customer
+ */
+@Validated
+@Entity
+@Table(name = "Customer")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2022-01-11T18:46:35.701+05:30[Asia/Calcutta]")
+public class Customer implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonProperty("customerId")
+	private Integer customerId = null;        				
