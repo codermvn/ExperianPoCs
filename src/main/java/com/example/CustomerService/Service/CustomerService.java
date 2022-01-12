@@ -18,8 +18,10 @@ public class CustomerService {
 	CustomerRepository customerRepository;
 
 	public Customer getCustomerById(int id) {
-		Customer customer = customerRepository.findById(id).get();
-		if (null == customer) {
+		Customer customer = null;
+		try {
+			customer = customerRepository.findById(id).get();
+		} catch (Exception e) {
 			throw new CustomerNotFoundException("customer not found");
 		}
 		return customer;
