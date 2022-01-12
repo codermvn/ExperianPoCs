@@ -12,8 +12,8 @@ public class CustomerValidator {
 	public static final String BAD_REQUEST_MESSAGE = "bad Request: Required field value is invalid";
 	
 	public static void validateCustomer(InputCustomer inputCustomer) {
-		if (Optional.ofNullable(inputCustomer.getCustomerName()).isPresent() || Optional.ofNullable(inputCustomer.getCustomerAddress()).isPresent()
-				|| Optional.ofNullable(inputCustomer.getDebitAvailable()).isPresent() || Optional.ofNullable(inputCustomer.getModeOfPayment()).isPresent()) {
+		if (!Optional.ofNullable(inputCustomer.getCustomerName()).isPresent() || !Optional.ofNullable(inputCustomer.getCustomerAddress()).isPresent()
+				|| !Optional.ofNullable(inputCustomer.getDebitAvailable()).isPresent() || !Optional.ofNullable(inputCustomer.getModeOfPayment()).isPresent()) {
 			throw new CustomerServiceException(BAD_REQUEST_MESSAGE);
 		}
 	}
