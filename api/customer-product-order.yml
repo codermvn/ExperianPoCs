@@ -103,16 +103,39 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Customer'
+              $ref: '#/components/schemas/InputCustomer'
+          application/xml:
+              schema:
+                $ref: '#/components/schemas/InputCustomer'    
         description: Customer to add  
       responses:
         '200':
-          description: Customer added
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Customer'
         '400':
           description: invalid input, object invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
         '409':
           description: Customer already exists
-          
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
   /getCustomer/{customerId}:
     get:
       tags:
@@ -134,59 +157,125 @@ paths:
           content:
             application/json:
               schema:
-                  $ref: '#/components/schemas/Order'
+                $ref: '#/components/schemas/Customer'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Customer'
         '404':
-          description: bad input parameter
-  /debit/{customerId}:
+          description: search customer not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
+  /debit:
     post:
       tags:
         - customers
       summary: debit amount
       description: |
         debit amount
-      # Path Param
-      parameters:
-      -  name: customerId
-         in: path
-         required: true
-         schema:
-            type: integer  
       requestBody:
         content:
           application/json:
             schema:
-                  $ref: '#/components/schemas/Amount'
+                $ref: '#/components/schemas/CustomerAmount'
+          application/xml:
+              schema:
+                $ref: '#/components/schemas/CustomerAmount'      
         description: amount to be debited  
       responses:
         '200':
           description: amount debited
-        '400':
-          description: invalid input, object invalid 
-  /credit/{customerId}:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '500':
+          description: internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
+        '404':
+          description: Customer could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
+        '408':
+          description: available debit is less than debit requested
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
+  /credit:
     post:
       tags:
         - customers
       summary: credit amount
       description: |
         credit amount
-      # Path Param
-      parameters:
-      -  name: customerId
-         in: path
-         required: true
-         schema:
-            type: integer  
       requestBody:
         content:
           application/json:
             schema:
-                  $ref: '#/components/schemas/Amount'
+                $ref: '#/components/schemas/CustomerAmount'
+          application/xml:
+              schema:
+                $ref: '#/components/schemas/CustomerAmount'  
         description: amount to be credited  
       responses:
         '200':
           description: amount credited
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '500':
+          description: internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
+        '404':
+          description: Customer could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
         '400':
-          description: invalid input, object invalid        
+          description: invalid input, object invalid, incase someone sends negative amount
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'        
 components:
   schemas:
     Product:
@@ -209,23 +298,34 @@ components:
           type: string  
         inventory:
           type: integer
+    InputCustomer:
+      properties:
+        customerName:
+          type: string
+        modeOfPayment:
+          type: string
+        debitAvailable:
+          type: number
+        customerAddress:
+          type: string      
     Customer:
-      required:
-        - customerId
       properties:
         customerId:
           type: integer
         customerName:
           type: string
         modeOfPayment:
-          type: string  
-          example: Mainak
+          type: string
         debitAvailable:
           type: number
         customerAddress:
           type: string
         status:
           type: string
+          enum:
+                - active
+                - inactive
+                - blocked
     Order:
       type: object
       required:
@@ -266,8 +366,20 @@ components:
           type: array
           items: 
             $ref: '#/components/schemas/Product'
-    Amount:
+    CustomerAmount:
       type: object
       properties:
+        customerId:
+          type: integer
         value:
-          type: number        
+          type: number
+    ExceptionResponse:
+      properties:
+        errorMessage:
+          type: string
+        requestedURI:
+          type: string
+        reason:
+          type: string
+        errorCode:
+          type: integer
