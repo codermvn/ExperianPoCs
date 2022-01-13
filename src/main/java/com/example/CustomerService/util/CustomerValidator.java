@@ -23,7 +23,7 @@ public class CustomerValidator {
 	 * @param customerAmount
 	 */
 	public static void validateAmount(@Valid CustomerAmount customerAmount) {
-		if (Optional.ofNullable(customerAmount.getValue()).isPresent() || customerAmount.getValue().signum() == -1) {
+		if (!Optional.ofNullable(customerAmount.getValue()).isPresent() || customerAmount.getValue().signum() == -1) {
 			throw new CustomerServiceException(BAD_REQUEST_MESSAGE);
 		}
 	}
