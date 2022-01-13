@@ -1,5 +1,7 @@
 package com.example.CustomerService.Exception;
 
+import java.sql.SQLException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
@@ -52,11 +54,11 @@ public class ExceptionHandlerControllerAdvice extends ResponseEntityExceptionHan
 		error.setErrorCode(HttpStatus.CONFLICT.value());
 		return error;
 	}
-	
+
 	@ExceptionHandler(InsufficientBalanceException.class)
 	@ResponseStatus(value = HttpStatus.REQUEST_TIMEOUT)
-	public @ResponseBody ExceptionResponse handleInsufficientBalanceException(final InsufficientBalanceException exception,
-			final HttpServletRequest request) {
+	public @ResponseBody ExceptionResponse handleInsufficientBalanceException(
+			final InsufficientBalanceException exception, final HttpServletRequest request) {
 
 		ExceptionResponse error = new ExceptionResponse();
 		error.setErrorMessage("Insufficient Balance");
@@ -65,4 +67,18 @@ public class ExceptionHandlerControllerAdvice extends ResponseEntityExceptionHan
 		error.setErrorCode(HttpStatus.REQUEST_TIMEOUT.value());
 		return error;
 	}
+
+	@ExceptionHandler(SQLException.class)
+	@ResponseStatus(value = HttpStatus.EXPECTATION_FAILED)
+	public @ResponseBody ExceptionResponse handleSqlException(final SQLException exception,
+			final HttpServletRequest request) {
+
+		ExceptionResponse error = new ExceptionResponse();
+		error.setErrorMessage(exception.getMessage());
+		error.setRequestedURI(request.getRequestURI());
+		error.setReason(exception.getMessage());
+		error.setErrorCode(HttpStatus.EXPECTATION_FAILED.value());
+		return error;
+	}
+
 }
