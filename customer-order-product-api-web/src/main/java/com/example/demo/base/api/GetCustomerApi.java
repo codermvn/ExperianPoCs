@@ -57,7 +57,7 @@ public interface GetCustomerApi {
         produces = { "application/json", "application/xml" }, 
         method = RequestMethod.GET)
     default ResponseEntity<Customer> getCustomerCustomerIdGet(@ApiParam(value = "",required=true) @PathVariable("customerId") Integer customerId
-) {
+) throws Exception{
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {

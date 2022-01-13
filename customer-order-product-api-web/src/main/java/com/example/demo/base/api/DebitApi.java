@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -61,7 +62,7 @@ public interface DebitApi {
         consumes = { "application/json", "application/xml" },
         method = RequestMethod.POST)
     default ResponseEntity<Customer> debitPost(@ApiParam(value = "amount to be debited"  )  @Valid @RequestBody CustomerAmount body
-) {
+) throws SQLException {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
