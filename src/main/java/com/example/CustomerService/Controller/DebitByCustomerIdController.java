@@ -1,6 +1,6 @@
 package com.example.CustomerService.Controller;
 
-import java.math.BigDecimal;
+import java.sql.SQLException;
 
 import javax.validation.Valid;
 
@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.CustomerService.Exception.InsufficientBalanceException;
-import com.example.CustomerService.Repository.CustomerRepository;
 import com.example.CustomerService.Service.CustomerService;
 import com.example.demo.base.api.DebitApi;
 import com.example.demo.base.model.Customer;
@@ -32,9 +30,6 @@ public class DebitByCustomerIdController implements DebitApi {
 	@Autowired
 	CustomerService customerService;
 
-	@Autowired
-	CustomerRepository customerRepository;
-
 	@ApiOperation(value = "debit amount", nickname = "debitPost", notes = "debit amount ", response = Customer.class, tags = {
 			"customers", })
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "amount debited", response = Customer.class),
@@ -44,21 +39,10 @@ public class DebitByCustomerIdController implements DebitApi {
 	@RequestMapping(value = "/debit", produces = { "application/json", "application/xml" }, consumes = {
 			"application/json", "application/xml" }, method = RequestMethod.POST)
 	public ResponseEntity<Customer> debitPost(
-			@ApiParam(value = "amount to be debited") @Valid @RequestBody CustomerAmount customerAmount) {
-		/**
-		 * below method will handle 404
-		 */
-		Customer customer = customerService.getCustomerById(customerAmount.getCustomerId());
-		BigDecimal subtractVal = customer.getDebitAvailable().subtract(customerAmount.getValue());
-		Customer addedCustomer = null;
-		if (subtractVal.compareTo(BigDecimal.ZERO) > 0) {
+			@ApiParam(value = "amount to be debited") @Valid @RequestBody CustomerAmount customerAmount)
+			throws SQLException {
 
-			customer.setDebitAvailable(subtractVal);
-			addedCustomer = customerRepository.save(customer);
-		} else {
-			System.out.println("insufficient amount to perform debit");
-			throw new InsufficientBalanceException("insufficient amount to perform debit");
-		}
-		return new ResponseEntity<>(addedCustomer, HttpStatus.NOT_IMPLEMENTED);
+		customerService.debitAmountCustomer(customerAmount);
+		return new ResponseEntity<Customer>(HttpStatus.OK);
 	}
 }

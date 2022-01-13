@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.CustomerService.Repository.CustomerRepository;
+import com.example.CustomerService.Exception.CustomerNotFoundException;
 import com.example.CustomerService.Service.CustomerService;
 import com.example.demo.base.api.GetCustomerApi;
 import com.example.demo.base.model.Customer;
@@ -26,9 +26,6 @@ public class GetCustomerByIdController implements GetCustomerApi {
 	@Autowired
 	CustomerService customerService;
 
-	@Autowired
-	CustomerRepository customerRepository;
-
 	@ApiOperation(value = "get customer By customerId", nickname = "getCustomerCustomerIdGet", notes = "you can get customer by customerId ", response = Customer.class, tags = {
 			"customers", })
 	@ApiResponses(value = {
@@ -37,10 +34,10 @@ public class GetCustomerByIdController implements GetCustomerApi {
 	@RequestMapping(value = "/getCustomer/{customerId}", produces = { "application/json",
 			"application/xml" }, method = RequestMethod.GET)
 	public ResponseEntity<Customer> getCustomerCustomerIdGet(
-			@ApiParam(value = "", required = true) @PathVariable("customerId") Integer customerId) {
-		Customer customer = customerService.getCustomerById(customerId);
+			@ApiParam(value = "", required = true) @PathVariable("customerId") Integer customerId)
+			throws CustomerNotFoundException {
 
+		Customer customer = customerService.getCustomerById(customerId);
 		return new ResponseEntity<>(customer, HttpStatus.OK);
 	}
-
 }
