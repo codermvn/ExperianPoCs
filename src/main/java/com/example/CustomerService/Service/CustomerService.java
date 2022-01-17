@@ -1,7 +1,6 @@
 package com.example.CustomerService.Service;
 
 import java.math.BigDecimal;
-import java.sql.SQLException;
 
 import javax.validation.Valid;
 
@@ -9,15 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.CustomerService.Exception.CustomSQLException;
 import com.example.CustomerService.Exception.CustomerNotFoundException;
 import com.example.CustomerService.Exception.DataAlreadyExistsException;
 import com.example.CustomerService.Exception.InsufficientBalanceException;
 import com.example.CustomerService.Repository.CustomerRepository;
+import com.example.CustomerService.model.Customer;
+import com.example.CustomerService.model.Customer.StatusEnum;
+import com.example.CustomerService.model.CustomerAmount;
+import com.example.CustomerService.model.InputCustomer;
 import com.example.CustomerService.util.CustomerValidator;
-import com.example.demo.base.model.Customer;
-import com.example.demo.base.model.Customer.StatusEnum;
-import com.example.demo.base.model.CustomerAmount;
-import com.example.demo.base.model.InputCustomer;
 
 @Service
 public class CustomerService {
@@ -45,8 +45,8 @@ public class CustomerService {
 		return customerRepository.save(customer);
 	}
 	
-	@Transactional(rollbackFor = {SQLException.class})
-	public void createCustomerWithRuntimeException(@Valid InputCustomer inputCustomer) throws SQLException  {
+	@Transactional(rollbackFor = {CustomSQLException.class})
+	public Customer createCustomerWithRuntimeException(@Valid InputCustomer inputCustomer) {
 		/**
 		 *	below throws 400 for invalid input
 		 */
@@ -62,17 +62,18 @@ public class CustomerService {
 			
           if(addedCustomer.getCustomerName().length() >=10) {
         	  System.out.println("name exceeds 10 characters");
-        	  throw new SQLException("Throwing exception for Rollback");
+        	  throw new CustomSQLException("Throwing exception for Rollback");
           }  
 			
 		} else {
 				System.out.println("This customer already exists!");
 				throw new DataAlreadyExistsException("customer already Exists");
-			} 
+			}
+		return addedCustomer; 
 		}
 	
-	@Transactional(rollbackFor = {SQLException.class})
-	public void creditAmountCustomer(CustomerAmount customerAmount) throws SQLException {
+	@Transactional(rollbackFor = {CustomSQLException.class})
+	public Customer creditAmountCustomer(CustomerAmount customerAmount) {
 
         /**
 		 * below method will handle 400
@@ -84,19 +85,20 @@ public class CustomerService {
 		Customer customer = getCustomerById(customerAmount.getCustomerId());
 		BigDecimal addedValue = customer.getDebitAvailable().add(customerAmount.getValue());
 		customer.setDebitAvailable(addedValue);
-		customerRepository.save(customer);
+		Customer addedCustomer = customerRepository.save(customer);
 		
 		BigDecimal b1 = new BigDecimal(40000);
 		
 		if ((customer.getDebitAvailable().compareTo(b1) == 0) || (customer.getDebitAvailable().compareTo(b1) > 0)) {
 			System.out.println("Credit cannot be done!");
-			throw new SQLException("Throwing exception for Rollback");
+			throw new CustomSQLException("Throwing exception for Rollback");
 		}
+		return addedCustomer;
 	}
 
-	@Transactional(rollbackFor = {SQLException.class})
-	public void debitAmountCustomer(CustomerAmount customerAmount) throws SQLException {
-
+	@Transactional(rollbackFor = {CustomSQLException.class})
+	public Customer debitAmountCustomer(CustomerAmount customerAmount) {
+		Customer addedCustomer = null;
         /**
 		 * below method will handle 400
 		 */
@@ -109,18 +111,19 @@ public class CustomerService {
 		if (subtractVal.compareTo(BigDecimal.ZERO) > 0) {
 
 			customer.setDebitAvailable(subtractVal);
-			customerRepository.save(customer);
+			addedCustomer = customerRepository.save(customer);
 			BigDecimal b1 = new BigDecimal(1000);
 			
 			if ((customer.getDebitAvailable().compareTo(b1) == 0) || (customer.getDebitAvailable().compareTo(b1) < 0)) {
 				System.out.println("Debit cannot be done!");
-				throw new SQLException("Throwing exception for Rollback");
+				throw new CustomSQLException("Throwing exception for Rollback");
 			}
 
 		} else {
 			System.out.println("insufficient amount to perform debit");
 			throw new InsufficientBalanceException("insufficient amount to perform debit");
 		}
+		return addedCustomer;
 		
 	}
 }
