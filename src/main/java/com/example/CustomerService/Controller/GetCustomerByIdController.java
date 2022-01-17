@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.CustomerService.Controllerapi.GetCustomerApi;
 import com.example.CustomerService.Exception.CustomerNotFoundException;
 import com.example.CustomerService.Service.CustomerService;
-import com.example.demo.base.api.GetCustomerApi;
-import com.example.demo.base.model.Customer;
-import com.example.demo.base.model.ExceptionResponse;
+import com.example.CustomerService.model.Customer;
+import com.example.CustomerService.model.ExceptionResponse;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -20,7 +20,6 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("/customer")
 public class GetCustomerByIdController implements GetCustomerApi {
 
 	@Autowired

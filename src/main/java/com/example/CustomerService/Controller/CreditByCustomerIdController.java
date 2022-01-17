@@ -1,7 +1,5 @@
 package com.example.CustomerService.Controller;
 
-import java.sql.SQLException;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.CustomerService.Controllerapi.CreditApi;
 import com.example.CustomerService.Service.CustomerService;
-import com.example.demo.base.api.CreditApi;
-import com.example.demo.base.model.Customer;
-import com.example.demo.base.model.CustomerAmount;
-import com.example.demo.base.model.ExceptionResponse;
+import com.example.CustomerService.model.Customer;
+import com.example.CustomerService.model.CustomerAmount;
+import com.example.CustomerService.model.ExceptionResponse;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -24,7 +22,6 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("/customer")
 public class CreditByCustomerIdController implements CreditApi {
 
 	@Autowired
@@ -39,10 +36,9 @@ public class CreditByCustomerIdController implements CreditApi {
 	@RequestMapping(value = "/credit", produces = { "application/json", "application/xml" }, consumes = {
 			"application/json", "application/xml" }, method = RequestMethod.POST)
 	public ResponseEntity<Customer> creditPost(
-			@ApiParam(value = "amount to be credited") @Valid @RequestBody CustomerAmount customerAmount)
-			throws SQLException {
+			@ApiParam(value = "amount to be credited") @Valid @RequestBody CustomerAmount customerAmount) {
 
-		customerService.creditAmountCustomer(customerAmount);
-		return new ResponseEntity<Customer>(HttpStatus.OK);
+		Customer customer = customerService.creditAmountCustomer(customerAmount);
+		return new ResponseEntity<>(customer, HttpStatus.OK);
 	}
 }
