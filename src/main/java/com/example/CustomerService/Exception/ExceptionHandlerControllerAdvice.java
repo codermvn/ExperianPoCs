@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.example.demo.base.model.ExceptionResponse;
+import com.example.CustomerService.model.ExceptionResponse;
 
 @ControllerAdvice
 public class ExceptionHandlerControllerAdvice extends ResponseEntityExceptionHandler {

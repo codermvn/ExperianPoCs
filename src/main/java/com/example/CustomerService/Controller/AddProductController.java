@@ -14,7 +14,7 @@ import com.example.CustomerService.Controllerapi.AddProductApi;
 import com.example.CustomerService.Service.ProductService;
 import com.example.CustomerService.model.ExceptionResponse;
 import com.example.CustomerService.model.InputProduct;
-import com.example.demo.base.model.Product;
+import com.example.CustomerService.model.Product;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

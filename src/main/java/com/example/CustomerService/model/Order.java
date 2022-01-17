@@ -19,9 +19,6 @@ import javax.persistence.Table;
 import javax.validation.Valid;
 
 import org.springframework.validation.annotation.Validated;
-
-import com.example.demo.base.model.Customer;
-import com.example.demo.base.model.OrderProduct;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;

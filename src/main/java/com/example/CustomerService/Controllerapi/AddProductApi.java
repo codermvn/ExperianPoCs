@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.example.CustomerService.model.ExceptionResponse;
 import com.example.CustomerService.model.InputProduct;
-import com.example.demo.base.model.ExceptionResponse;
-import com.example.demo.base.model.Product;
+import com.example.CustomerService.model.Product;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.swagger.annotations.Api;
