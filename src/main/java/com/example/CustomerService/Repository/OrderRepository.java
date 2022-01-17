@@ -5,12 +5,12 @@ import java.math.BigDecimal;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.CustomerService.model.Customer;
+import com.example.demo.base.model.Order;
 
 @Repository
-public interface CustomerRepository extends CrudRepository<Customer, Integer> {
+public interface OrderRepository extends CrudRepository<Order, Integer> {
 
-	Customer findByCustomerNameAndCustomerAddressAndDebitAvailable(String customerName, String customerAddress,
+	Order findByCustomerNameAndCustomerAddressAndDebitAvailable(String customerName, String customerAddress,
 			BigDecimal debitAvailable);
 
 }
