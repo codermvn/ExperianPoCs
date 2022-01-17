@@ -68,7 +68,7 @@ public class ExceptionHandlerControllerAdvice extends ResponseEntityExceptionHan
 		return error;
 	}
 
-	@ExceptionHandler(SQLException.class)
+	@ExceptionHandler(CustomSQLException.class)
 	@ResponseStatus(value = HttpStatus.EXPECTATION_FAILED)
 	public @ResponseBody ExceptionResponse handleSqlException(final SQLException exception,
 			final HttpServletRequest request) {
