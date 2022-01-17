@@ -9,7 +9,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import com.example.CustomerService.Exception.CustomerServiceException;
-import com.example.demo.base.model.InputCustomer;
+import com.example.CustomerService.model.InputCustomer;
 
 public class CustomerValidatorUtilTest {
 
