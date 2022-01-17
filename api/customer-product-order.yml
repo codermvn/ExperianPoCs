@@ -7,54 +7,65 @@ servers:
   - description: SwaggerHub API Auto Mocking
     url: https://virtserver.swaggerhub.com/self7648/Order-Customer/1.0.0
 info:
-  description: This is a simple API
+  description: Order-Customer-Product
   version: "1.0.0"
-  title: Simple Inventory API
+  title: Order-Customer-Product-API
   contact:
     email: you@your-company.com
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    
 tags:
   - name: customers
     description: Operations for add update or delete customers
   - name: orders
     description: Operations for add update or delete customer orders
+  - name: products
+    description: Operations for add update or delete products  
 paths:
-  /createOrder/{customerId}:
+  /createOrder:
     post:
       tags:
         - orders
       summary: create Order
       description: |
         create Order
-      parameters:
-      -  name: customerId
-         in: path
-         required: true
-         schema:
-            type: integer  
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OrderDetails'
-        description: Customer Order to add  
+              $ref: '#/components/schemas/InputOrder'
+          application/xml:
+              schema:
+                $ref: '#/components/schemas/InputOrder'      
+        description: Order to add  
       responses:
-        '201':
-          description: Customer Order added
+        '200':
+          description: order added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Order'
         '400':
-          description: 'invalid input, object invalid'
-        '409':
-          description: Customer Order already exists
-          
+          description: invalid input, object invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'    
   /getOrder/{orderId}:
     get:
       tags:
         - orders
-      summary: get customer By orderId
+      summary: get order By orderId
       description: |
-        you can delete customer by orderId
+        you can get order by orderId
         
       # Path Param
       parameters:
@@ -69,15 +80,26 @@ paths:
           content:
             application/json:
               schema:
-                  $ref: '#/components/schemas/Order'
-          
+                $ref: '#/components/schemas/Order'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '404':
+          description: search order not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
   /deleteOrder/{orderId}:
     delete:
       tags:
         - orders
-      summary: delete customer By orderId
+      summary: delete Order By orderId
       description: |
-        you can delete customer by orderId
+        you can delete order by orderId
         
       # Path Param
       parameters:
@@ -88,10 +110,23 @@ paths:
             type: integer
       responses:
         '200':
-          description: Order deleted
-        '400':
-          description: bad input parameter
-          
+          description: delete order has failed status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '404':
+          description: search order not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
   /createCustomer:
     post:
       tags:
@@ -267,15 +302,94 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/ExceptionResponse'
-        '400':
-          description: invalid input, object invalid, incase someone sends negative amount
+        '409':
+          description: incase someone sends negative amount
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExceptionResponse'
             application/xml:
               schema:
-                $ref: '#/components/schemas/ExceptionResponse'        
+                $ref: '#/components/schemas/ExceptionResponse' 
+                
+  /addProduct:
+    post:
+      tags:
+        - products
+      summary: add product
+      description: |
+        add product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InputProduct'
+          application/xml:
+              schema:
+                $ref: '#/components/schemas/InputProduct'    
+        description: product to add  
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: invalid input, object invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
+        '409':
+          description: Product already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
+  /getProduct/{productId}:
+    get:
+      tags:
+        - products
+      summary: get product By productId
+      description: |
+        you can get product by productId
+        
+      # Path Param
+      parameters:
+      -  name: productId
+         in: path
+         required: true
+         schema:
+            type: integer
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: search customer not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'              
 components:
   schemas:
     Product:
@@ -291,13 +405,32 @@ components:
           type: integer
         productName:
           type: string
-          example: Widget Adapter
+          example: Shirt
         productPrice:
           type: number
         company:
           type: string  
         inventory:
           type: integer
+    InputProduct:
+      type: object
+      required:
+        - productName
+        - productPrice
+        - company
+        - inventory
+      properties:
+        productId:
+          type: integer
+        productName:
+          type: string
+        productPrice:
+          type: number
+        company:
+          type: string  
+        inventory:
+          type: integer
+      
     InputCustomer:
       properties:
         customerName:
@@ -326,31 +459,47 @@ components:
                 - active
                 - inactive
                 - blocked
-    Order:
+    InputOrder:
       type: object
       required:
-        - orderId
+        - customerId
+      properties:
+        customerId:
+          type: integer  
+        orderProducts:
+          type: array
+          items:
+            $ref: '#/components/schemas/InputOrderProduct'
+    Order:
+      type: object
       properties:
         orderId:
           type: integer
-        customerId:
-            $ref: '#/components/schemas/Customer'
-        orderProductId:
+        customer:
+          $ref: '#/components/schemas/Customer' 
+        orderProducts:
           type: array
           items:
-            $ref: '#/components/schemas/Product'
+            $ref: '#/components/schemas/OrderProduct'
         orderValue:
           type: number
-        orderStatus:
+        ordStatus:
           type: string
+          enum:
+                - success
+                - failed
+                - pending 
+    InputOrderProduct:
+      type: object
+      properties:
+        productId:
+          type: integer
+        quantity:
+          type: integer
     OrderProduct:
       type: object
-      required:
-        - orderProductId
       properties:
-        orderProductId:
-          type: integer
-        productId:
+        product:
           $ref: '#/components/schemas/Product'
         quantity:
           type: integer
@@ -359,13 +508,6 @@ components:
           description: Start date
           example: "2017-01-01"
           format: date
-    OrderDetails:
-      type: object
-      properties:
-        products:
-          type: array
-          items: 
-            $ref: '#/components/schemas/Product'
     CustomerAmount:
       type: object
       properties:
