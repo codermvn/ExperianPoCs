@@ -6,98 +6,265 @@
 	},
 	"item": [
 		{
-			"name": "addCustomerInvalidInput",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"customerName\": \"Mainak\",\r\n    \"modeOfPayment\": \"cash\",\r\n    \"customerAddress\": \"Kolkata\"\r\n}"
+			"name": "Product",
+			"item": [
+				{
+					"name": "addProduct",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productName\": \"T-Shirt\",\r\n    \"productPrice\": 250,\r\n    \"company\": \"Turtle\",\r\n    \"inventory\":2000\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/addProduct",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"addProduct"
+							]
+						}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8082/customer/createCustomer",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8082",
-					"path": [
-						"customer",
-						"createCustomer"
-					]
+				{
+					"name": "getProductById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerName\": \"Mainak\",\r\n    \"modeOfPayment\": \"cash\",\r\n    \"customerAddress\": \"Kolkata\",\r\n    \"debitAvailable\":20000.00\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/getProduct/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"getProduct",
+								"3"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "addCustomerValidInput",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"customerName\": \"Mainak\",\r\n    \"modeOfPayment\": \"cash\",\r\n    \"customerAddress\": \"Kolkata\",\r\n    \"debitAvailable\":20000.00\r\n}"
+			"name": "Customer",
+			"item": [
+				{
+					"name": "addCustomerInvalidInput",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerName\": \"Mainak\",\r\n    \"modeOfPayment\": \"cash\",\r\n    \"customerAddress\": \"Kolkata\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/customer/createCustomer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"customer",
+								"createCustomer"
+							]
+						}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8082/customer/createCustomer",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8082",
-					"path": [
-						"customer",
-						"createCustomer"
-					]
+				{
+					"name": "addCustomerValidInput",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerName\": \"Deepak\",\r\n    \"modeOfPayment\": \"cash\",\r\n    \"customerAddress\": \"Mumbai\",\r\n    \"debitAvailable\":1000\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/createCustomer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"createCustomer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCustomerById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerName\": \"Mainak\",\r\n    \"modeOfPayment\": \"cash\",\r\n    \"customerAddress\": \"Kolkata\",\r\n    \"debitAvailable\":20000.00\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/getCustomer/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"getCustomer",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "getCustomerById",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"customerName\": \"Mainak\",\r\n    \"modeOfPayment\": \"cash\",\r\n    \"customerAddress\": \"Kolkata\",\r\n    \"debitAvailable\":20000.00\r\n}"
+			"name": "Order",
+			"item": [
+				{
+					"name": "addOrder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customerId\": 1,\r\n  \"orderProducts\": [\r\n    {\r\n      \"productId\": 50,\r\n      \"quantity\": 15\r\n    }\r\n  ]\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/createOrder",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"createOrder"
+							]
+						}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8082/customer/getCustomer/7",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8082",
-					"path": [
-						"customer",
-						"getCustomer",
-						"7"
-					]
+				{
+					"name": "getOrderById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerName\": \"Mainak\",\r\n    \"modeOfPayment\": \"cash\",\r\n    \"customerAddress\": \"Kolkata\",\r\n    \"debitAvailable\":20000.00\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/getOrder/67",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"getOrder",
+								"67"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteOrderById",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerName\": \"Mainak\",\r\n    \"modeOfPayment\": \"cash\",\r\n    \"customerAddress\": \"Kolkata\",\r\n    \"debitAvailable\":20000.00\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8082/deleteOrder/67",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"deleteOrder",
+								"67"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		}
 	]
 }
