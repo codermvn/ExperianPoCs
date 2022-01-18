@@ -19,6 +19,7 @@ import com.example.CustomerService.model.ExceptionResponse;
 import com.example.CustomerService.model.InputOrder;
 import com.example.CustomerService.model.Order;
 import com.example.CustomerService.transformer.CreateOrderTransformer;
+import com.example.CustomerService.util.OrderValidator;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -46,6 +47,7 @@ public class CreateOrderController implements CreateOrderApi {
 	public ResponseEntity<Order> createOrderPost(
 			@ApiParam(value = "Order to add") @Valid @RequestBody InputOrder inputOrder) {
 		
+		OrderValidator.validateOrder(inputOrder);
 		Customer customer = customerService.getCustomerById(inputOrder.getCustomerId());
 		
 		Order order = CreateOrderTransformer.getInstance(productService).populateOrder(inputOrder, customer);
