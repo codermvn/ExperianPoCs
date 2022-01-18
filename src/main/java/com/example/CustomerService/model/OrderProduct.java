@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,8 +15,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
 
-import org.springframework.validation.annotation.Validated;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -25,7 +23,6 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * OrderProduct
  */
-@Validated
 @Entity
 @Table(name = "OrderProduct")
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2022-01-14T00:13:12.191+05:30[Asia/Calcutta]")
@@ -45,9 +42,8 @@ public class OrderProduct implements Serializable {
 		this.orderProductId = orderProductId;
 	}
 	
-	@JsonProperty("product")
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "productId")
+	@OneToOne
+	@JoinColumn(name="pId", referencedColumnName = "productId")
 	private Product product = null;
 
 	@JsonProperty("quantity")
@@ -61,8 +57,9 @@ public class OrderProduct implements Serializable {
 		return this;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	//@JoinColumn(name = "orderId", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+	@JoinColumn(name = "orderId", nullable = false, referencedColumnName = "orderId")
 	private Order order;
 
 	public Order getOrder() {

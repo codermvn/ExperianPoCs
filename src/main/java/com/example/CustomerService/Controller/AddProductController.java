@@ -36,7 +36,7 @@ public class AddProductController implements AddProductApi {
 			"application/json", "application/xml" }, method = RequestMethod.POST)
 	public ResponseEntity<Product> addProductPost(
 			@ApiParam(value = "product to add") @Valid @RequestBody InputProduct inputProduct) {
-		productService.createProduct(inputProduct);
-		return new ResponseEntity<>(HttpStatus.OK);
+		Product addedProduct = productService.createProduct(inputProduct);
+		return new ResponseEntity<>(addedProduct, HttpStatus.OK);
 	}
 }

@@ -23,9 +23,9 @@ public class ProductService {
 	public Product getProductById(int id) {
 		Product product = null;
 		try {
-			product = productRepository.findById(id).get();
+			product = productRepository.findByProductId(id);
 		} catch (Exception e) {
-			throw new CustomerNotFoundException("customer not found");
+			throw new CustomerNotFoundException("product not found");
 		}
 		return product;
 	}

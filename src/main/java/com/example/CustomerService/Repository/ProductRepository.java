@@ -10,4 +10,5 @@ import com.example.CustomerService.model.Product;
 @Repository
 public interface ProductRepository extends CrudRepository<Product, Integer> {
 	Product findByProductNameAndProductPriceAndCompany(String productName, BigDecimal productPrice, String company);
+	Product findByProductId(int id);
 }

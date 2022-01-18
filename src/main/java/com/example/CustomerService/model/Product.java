@@ -37,17 +37,6 @@ public class Product implements Serializable {
 	@JsonProperty("inventory")
 	private Integer inventory = null;
 
-	@OneToOne(mappedBy = "product")
-	private OrderProduct orderProduct;
-
-	public OrderProduct getOrderProduct() {
-		return orderProduct;
-	}
-
-	public void setOrderProduct(OrderProduct orderProduct) {
-		this.orderProduct = orderProduct;
-	}
-
 	public Product productId(Integer productId) {
 		this.productId = productId;
 		return this;

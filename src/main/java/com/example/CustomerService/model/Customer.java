@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.annotations.ApiModelProperty;
+
 /**
  * Customer
  */
@@ -46,16 +47,13 @@ public class Customer implements Serializable {
 	@JsonProperty("customerAddress")
 	private String customerAddress = null;
 
-	@OneToOne(mappedBy = "customer")
-	private Order order;
-
-	public Order getOrder() {
-		return order;
-	}
-
-	public void setOrder(Order order) {
-		this.order = order;
-	}
+	/*
+	 * @OneToOne(mappedBy = "customer") private Order order;
+	 * 
+	 * public Order getOrder() { return order; }
+	 * 
+	 * public void setOrder(Order order) { this.order = order; }
+	 */
 
 	/**
 	 * Gets or Sets status
