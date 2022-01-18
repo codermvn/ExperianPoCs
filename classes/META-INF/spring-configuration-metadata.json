@@ -1,0 +1,27 @@
+{
+  "groups": [
+    {
+      "name": "admin",
+      "type": "com.example.adminservice.StartupProperties",
+      "sourceType": "com.example.adminservice.StartupProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "admin.password",
+      "type": "java.lang.String",
+      "sourceType": "com.example.adminservice.StartupProperties"
+    },
+    {
+      "name": "admin.status",
+      "type": "java.lang.Character",
+      "sourceType": "com.example.adminservice.StartupProperties"
+    },
+    {
+      "name": "admin.username",
+      "type": "java.lang.String",
+      "sourceType": "com.example.adminservice.StartupProperties"
+    }
+  ],
+  "hints": []
+}
