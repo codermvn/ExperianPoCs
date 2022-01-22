@@ -39,6 +39,17 @@ public class ProductService {
 		return productRepository.save(product);
 	}
 	
+	public Product deductInventory(Integer productId, Integer quantity) {
+		Product product = getProductById(productId);
+		if(product.getInventory() - quantity > 0) {
+		  product.setInventory(product.getInventory() - quantity);
+		}
+		else {
+			System.out.println("required qty is not present");
+		}
+		return productRepository.save(product);
+	}
+	
 	@Transactional(rollbackFor = {CustomSQLException.class})
 	public Product createProduct(@Valid InputProduct inputProduct) {
 		/**
@@ -54,7 +65,7 @@ public class ProductService {
 			System.out.println("Product successfully added");
 			
           if(addedProduct.getInventory() < 0 ) {
-        	  System.out.println("Inventory can not negative");
+        	  System.out.println("Inventory can not be negative");
         	  throw new CustomSQLException("Throwing exception for Rollback");
           }  
 			
