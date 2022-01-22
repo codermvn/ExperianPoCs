@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -43,7 +42,7 @@ public class OrderProduct implements Serializable {
 	}
 	
 	@OneToOne
-	@JoinColumn(name="pId", referencedColumnName = "productId")
+	//@JoinColumn(name="pId", referencedColumnName = "productId")
 	private Product product = null;
 
 	@JsonProperty("quantity")
@@ -59,7 +58,7 @@ public class OrderProduct implements Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
-	@JoinColumn(name = "orderId", nullable = false, referencedColumnName = "orderId")
+//	@JoinColumn(name = "orderId", nullable = false, referencedColumnName = "orderId")
 	private Order order;
 
 	public Order getOrder() {
