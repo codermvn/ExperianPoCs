@@ -39,4 +39,18 @@ public class AddProductController implements AddProductApi {
 		Product addedProduct = productService.createProduct(inputProduct);
 		return new ResponseEntity<>(addedProduct, HttpStatus.OK);
 	}
+	
+	
+@ApiOperation(value = "add product", nickname = "addProductPost", notes = "add product ", response = Product.class, tags = {
+		"products", })
+@ApiResponses(value = { @ApiResponse(code = 200, message = "successful operation", response = Product.class),
+		@ApiResponse(code = 400, message = "invalid input, object invalid", response = ExceptionResponse.class),
+		@ApiResponse(code = 409, message = "Product already exists", response = ExceptionResponse.class) })
+@RequestMapping(value = "/deductInventory/{quantity}", produces = { "application/json", "application/xml" }, consumes = {
+		"application/json", "application/xml" }, method = RequestMethod.POST)
+public ResponseEntity<Product> deductInventoryPost(
+		@ApiParam(value = "inventory to delete") @Valid @RequestBody Integer productId, @ApiParam(value = "", required = true) @PathVariable("quantity") Integer quantity) {
+	Product updatedProduct = productService.deductInventory(productId, quantity);
+	return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
+  }
 }
