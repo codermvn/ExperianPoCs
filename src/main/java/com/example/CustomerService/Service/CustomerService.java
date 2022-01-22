@@ -96,8 +96,8 @@ public class CustomerService {
 		return addedCustomer;
 	}
 
-	@Transactional(rollbackFor = {CustomSQLException.class})
-	public Customer debitAmountCustomer(CustomerAmount customerAmount) {
+	@Transactional(rollbackFor = {InsufficientBalanceException.class})
+	public Customer debitAmountCustomer(CustomerAmount customerAmount) throws InsufficientBalanceException{
 		Customer addedCustomer = null;
         /**
 		 * below method will handle 400
@@ -108,17 +108,17 @@ public class CustomerService {
 		 */
 		Customer customer = getCustomerById(customerAmount.getCustomerId());
 		BigDecimal subtractVal = customer.getDebitAvailable().subtract(customerAmount.getValue());
-		if (subtractVal.compareTo(BigDecimal.ZERO) > 0) {
+	if (subtractVal.compareTo(BigDecimal.ZERO) > 0) {
 
 			customer.setDebitAvailable(subtractVal);
 			addedCustomer = customerRepository.save(customer);
-			BigDecimal b1 = new BigDecimal(1000);
+			/*BigDecimal b1 = new BigDecimal(1000);
 			
 			if ((customer.getDebitAvailable().compareTo(b1) == 0) || (customer.getDebitAvailable().compareTo(b1) < 0)) {
 				System.out.println("Debit cannot be done!");
 				throw new CustomSQLException("Throwing exception for Rollback");
 			}
-
+          */
 		} else {
 			System.out.println("insufficient amount to perform debit");
 			throw new InsufficientBalanceException("insufficient amount to perform debit");
