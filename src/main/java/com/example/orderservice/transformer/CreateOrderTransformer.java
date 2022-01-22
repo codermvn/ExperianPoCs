@@ -25,8 +25,6 @@ public class CreateOrderTransformer {
 		return new CreateOrderTransformer(restTemplate);
 	}
 	
-	
-	
 	public Order populateOrder(InputOrder inputOrder, Customer customer) {
 		Order order = new Order();
 		order.setCustomer(customer);
@@ -35,12 +33,16 @@ public class CreateOrderTransformer {
 			
 			for (InputOrderProduct eachOrderProduct: inputOrder.getOrderProducts()) {
 				Integer productId = eachOrderProduct.getProductId();
-				
+				Integer quantity = eachOrderProduct.getQuantity();
 				Product product = restTemplate.getForObject("http://localhost:8082/getProduct/{productId}", Product.class, productId);
 				
+				/**
+				 * below will deduct inventory for the product
+				 */
+				restTemplate.postForObject("http://localhost:8082/deductInventory/{quantity}", productId, Product.class, quantity);
 				addProductToOrder(order, product, eachOrderProduct);
 				
-				totalValue = totalValue.add(product.getProductPrice().multiply(new BigDecimal(eachOrderProduct.getQuantity())));
+				totalValue = totalValue.add(product.getProductPrice().multiply(new BigDecimal(quantity)));
 			}
 		}
 		order.setOrderValue(totalValue);
