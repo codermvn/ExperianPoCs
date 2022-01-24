@@ -58,7 +58,7 @@ public interface DebitApi {
         consumes = { "application/json", "application/xml" },
         method = RequestMethod.POST)
     default ResponseEntity<Customer> debitPost(@ApiParam(value = "amount to be debited"  )  @Valid @RequestBody CustomerAmount body
-) {
+)  {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {

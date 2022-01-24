@@ -2,6 +2,7 @@ package com.example.CustomerService.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -41,15 +42,27 @@ public class OrderProduct implements Serializable {
 		this.orderProductId = orderProductId;
 	}
 	
+	@JsonProperty("date")
+	private LocalDate date = null;
+	
+	@JsonProperty("time")
+	private LocalTime time = null;
+
+	
+	public LocalTime getTime() {
+		return time;
+	}
+
+	public void setTime(LocalTime time) {
+		this.time = time;
+	}
+
 	@OneToOne
 	//@JoinColumn(name="pId", referencedColumnName = "productId")
 	private Product product = null;
 
 	@JsonProperty("quantity")
 	private Integer quantity = null;
-
-	@JsonProperty("date")
-	private LocalDate date = null;
 
 	public OrderProduct product(Product product) {
 		this.product = product;

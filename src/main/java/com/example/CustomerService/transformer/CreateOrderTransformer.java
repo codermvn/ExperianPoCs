@@ -25,8 +25,6 @@ public class CreateOrderTransformer {
 		return new CreateOrderTransformer(productService);
 	}
 	
-	
-	
 	public Order populateOrder(InputOrder inputOrder, Customer customer) {
 		Order order = new Order();
 		order.setCustomer(customer);

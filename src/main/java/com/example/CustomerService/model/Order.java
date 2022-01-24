@@ -2,6 +2,8 @@ package com.example.CustomerService.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -42,6 +44,28 @@ public class Order implements Serializable {
 	@OneToOne
 	//@JoinColumn(name="cId", referencedColumnName = "customerId")
 	private Customer customer = null;
+
+	@JsonProperty("date")
+	private LocalDate date = null;
+	
+	@JsonProperty("time")
+	private LocalTime time = null;
+	
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
+
+	public LocalTime getTime() {
+		return time;
+	}
+
+	public void setTime(LocalTime time) {
+		this.time = time;
+	}
 
 	@JsonIgnore
 	@JsonProperty("orderProducts")

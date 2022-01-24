@@ -1,7 +1,5 @@
 package com.example.CustomerService.Exception;
 
-import java.sql.SQLException;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;

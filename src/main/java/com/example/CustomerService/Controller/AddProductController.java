@@ -40,8 +40,7 @@ public class AddProductController implements AddProductApi {
 		Product addedProduct = productService.createProduct(inputProduct);
 		return new ResponseEntity<>(addedProduct, HttpStatus.OK);
 	}
-	
-	
+
 @ApiOperation(value = "add product", nickname = "addProductPost", notes = "add product ", response = Product.class, tags = {
 		"products", })
 @ApiResponses(value = { @ApiResponse(code = 200, message = "successful operation", response = Product.class),

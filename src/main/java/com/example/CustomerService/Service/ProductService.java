@@ -41,7 +41,7 @@ public class ProductService {
 	
 	public Product deductInventory(Integer productId, Integer quantity) {
 		Product product = getProductById(productId);
-		if(product.getInventory() - quantity > 0) {
+		if(product.getInventory() - quantity >= 0) {
 		  product.setInventory(product.getInventory() - quantity);
 		}
 		else {
