@@ -2,6 +2,7 @@ package com.example.orderservice.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -50,6 +51,9 @@ public class OrderProduct implements Serializable {
 
 	@JsonProperty("date")
 	private LocalDate date = null;
+	
+	@JsonProperty("time")
+	private LocalTime time = null;
 
 	public OrderProduct product(Product product) {
 		this.product = product;
@@ -126,6 +130,14 @@ public class OrderProduct implements Serializable {
 		this.date = date;
 	}
 
+	public LocalTime getTime() {
+		return time;
+	}
+
+	public void setTime(LocalTime time) {
+		this.time = time;
+	}
+	
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {

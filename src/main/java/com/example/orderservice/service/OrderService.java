@@ -66,6 +66,7 @@ public class OrderService {
 		}
 		return deletedOrder;
 	}
+	
 
 	//@Transactional(rollbackFor = { InsufficientBalanceException.class })
 	public Order createOrderWithException(@RequestBody InputOrder inputOrder)  {
@@ -75,7 +76,9 @@ public class OrderService {
 		Customer customer = restTemplate.getForObject("http://localhost:8082/getCustomer/{customerId}", Customer.class,
 				customerId);
 
-		Order order = CreateOrderTransformer.getInstance(restTemplate).populateOrder(inputOrder, customer);
+		CreateOrderTransformer transformer = CreateOrderTransformer.getInstance(restTemplate);
+		
+		Order order = transformer.populateOrder(inputOrder, customer);
 		Order addOrder = addOrder(order);
 
 		CustomerAmount customerAmount = new CustomerAmount();
@@ -91,9 +94,10 @@ public class OrderService {
 		} catch (Exception e) {
 			System.out.println("insufficient balance to book order");
 			jmsTemplate.convertAndSend(queue,order.getOrderId());
-			order.setOrdStatus(OrdStatusEnum.FAILED);
 			throw new InsufficientBalanceException("balance insufficient");
 		}
+		
+		transformer.deductInventoryFromProduct(inputOrder);
 		return addOrder;
 	}
 }
