@@ -60,10 +60,10 @@ public class CustomerService {
 			addedCustomer = addCustomer(inputCustomer);
 			System.out.println("Customer successfully created");
 			
-          if(addedCustomer.getCustomerName().length() >=10) {
+         /* if(addedCustomer.getCustomerName().length() >=10) {
         	  System.out.println("name exceeds 10 characters");
         	  throw new CustomSQLException("Throwing exception for Rollback");
-          }  
+          }  */
 			
 		} else {
 				System.out.println("This customer already exists!");
@@ -72,7 +72,7 @@ public class CustomerService {
 		return addedCustomer; 
 		}
 	
-	@Transactional(rollbackFor = {CustomSQLException.class})
+	//@Transactional(rollbackFor = {CustomSQLException.class})
 	public Customer creditAmountCustomer(CustomerAmount customerAmount) {
 
         /**
@@ -87,12 +87,12 @@ public class CustomerService {
 		customer.setDebitAvailable(addedValue);
 		Customer addedCustomer = customerRepository.save(customer);
 		
-		BigDecimal b1 = new BigDecimal(40000);
+	/*	BigDecimal b1 = new BigDecimal(40000);
 		
 		if ((customer.getDebitAvailable().compareTo(b1) == 0) || (customer.getDebitAvailable().compareTo(b1) > 0)) {
 			System.out.println("Credit cannot be done!");
 			throw new CustomSQLException("Throwing exception for Rollback");
-		}
+		}*/
 		return addedCustomer;
 	}
 

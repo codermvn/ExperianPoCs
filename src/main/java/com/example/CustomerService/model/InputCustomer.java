@@ -36,8 +36,8 @@ public class InputCustomer  implements Serializable  {
     this.customerName = customerName;
     return this;
   }
-
-  /**
+  
+/**
    * Get customerName
    * @return customerName
   **/
