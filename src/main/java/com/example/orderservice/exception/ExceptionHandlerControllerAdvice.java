@@ -79,4 +79,18 @@ public class ExceptionHandlerControllerAdvice extends ResponseEntityExceptionHan
 		return error;
 	}
 
+	@ExceptionHandler(CustomException.class)
+	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+	public @ResponseBody ExceptionResponse handleCustomException(final CustomException exception,
+			final HttpServletRequest request) {
+
+		ExceptionResponse error = new ExceptionResponse();
+		error.setErrorMessage(exception.getMessage());
+		error.setRequestedURI(request.getRequestURI());
+		error.setReason(exception.getMessage());
+		error.setErrorCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+		return error;
+	}
+
+	
 }

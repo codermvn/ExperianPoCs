@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,8 +23,8 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-public class CreateOrderController implements CreateOrderApi {
-	
+//public class CreateOrderController implements CreateOrderApi {
+public class CreateOrderController {
 	@Autowired
 	OrderService orderService;
 	
@@ -34,9 +35,9 @@ public class CreateOrderController implements CreateOrderApi {
 	@RequestMapping(value = "/createOrder", produces = { "application/json", "application/xml" }, consumes = {
 			"application/json", "application/xml" }, method = RequestMethod.POST)
 	public ResponseEntity<Order> createOrderPost(
-			@ApiParam(value = "Order to add") @Valid @RequestBody InputOrder inputOrder) {
-		
-		Order addedOrder = orderService.createOrderWithException(inputOrder);
+			@ApiParam(value = "Order to add") @Valid @RequestBody InputOrder inputOrder, @RequestHeader("Authorization") String token
+) {
+		Order addedOrder = orderService.createOrderWithException(inputOrder,token);
 		return new ResponseEntity<>(addedOrder, HttpStatus.OK);
 	}
 }

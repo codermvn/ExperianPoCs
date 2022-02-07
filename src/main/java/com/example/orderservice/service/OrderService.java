@@ -3,12 +3,17 @@ package com.example.orderservice.service;
 import javax.jms.Queue;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
+import com.example.orderservice.exception.CustomException;
 import com.example.orderservice.exception.CustomerNotFoundException;
 import com.example.orderservice.exception.InsufficientBalanceException;
 import com.example.orderservice.model.Customer;
@@ -34,6 +39,15 @@ public class OrderService {
 
 	@Autowired
 	private RestTemplate restTemplate;
+	
+	@Autowired
+	private ProductService productService;
+	
+	@Value("${customer.host}")
+	String host;
+	
+	@Value("${customer.port}")
+	String port;
 
 	public Order addOrder(Order order) {
 		Order addedOrder = null;
@@ -67,20 +81,44 @@ public class OrderService {
 		return deletedOrder;
 	}
 	
-
 	//@Transactional(rollbackFor = { InsufficientBalanceException.class })
-	public Order createOrderWithException(@RequestBody InputOrder inputOrder)  {
+	public Order createOrderWithException(@RequestBody InputOrder inputOrder, String token)  {
 
 		OrderValidator.validateOrder(inputOrder);
 		Integer customerId = inputOrder.getCustomerId();
-		Customer customer = restTemplate.getForObject("http://localhost:8082/getCustomer/{customerId}", Customer.class,
-				customerId);
+		Customer customer = null;
+	//	customer.setCustomerId(customerId);
+		
+		try {
+		//customer = restTemplate.getForObject("http://localhost:8082/getCustomer/{customerId}",
+		//Customer.class, customerId);
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Authorization", token);
 
-		CreateOrderTransformer transformer = CreateOrderTransformer.getInstance(restTemplate);
+		HttpEntity entity = new HttpEntity(headers);
+		
+		ResponseEntity<Customer> customerResponse = restTemplate.exchange(
+				"http://"+host+":"+port+"/getCustomer/{customerId}",
+		        HttpMethod.GET,
+		        entity,
+		        Customer.class,
+		        customerId
+		);
+
+		customer = customerResponse.getBody();
+
+     	}
+     	catch (Exception e) {
+		System.out.println("Some error occured");
+		throw new CustomException("Some error occured in CustomerService");
+		}	
+		
+CreateOrderTransformer transformer = CreateOrderTransformer.getInstance(restTemplate,productService);
 		
 		Order order = transformer.populateOrder(inputOrder, customer);
 		Order addOrder = addOrder(order);
-
+		
 		CustomerAmount customerAmount = new CustomerAmount();
 		customerAmount.setCustomerId(customerId);
 		customerAmount.setValue(order.getOrderValue());
@@ -98,6 +136,7 @@ public class OrderService {
 		}
 		
 		transformer.deductInventoryFromProduct(inputOrder);
-		return addOrder;
+		addOrder.setOrdStatus(OrdStatusEnum.SUCCESS);
+		return addOrder(order);
 	}
 }

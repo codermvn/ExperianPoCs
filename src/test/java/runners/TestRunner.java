@@ -1,0 +1,16 @@
+package runners;
+
+import org.junit.runner.RunWith;
+
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(
+        features = "src/test/resources/functionalTests/End2End_Test.feature",
+        glue = { "stepDefinitions"},
+        		plugin = { "pretty","html:target/Destination" }, tags = { "" })
+
+public class TestRunner {
+
+}

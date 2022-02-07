@@ -16,17 +16,17 @@ public class Consumer {
 
 	@Autowired
 	OrderService orderService;
-	
-    @JmsListener(destination = "test.queue")
-    public void consume(String message) {
-        System.out.println(" Unsuccessful order, order Id: " + message);
-        
-       Order order = orderService.getOrderById(Integer.parseInt(message));
-       
-       order.setOrdStatus(OrdStatusEnum.FAILED);
-       order.setDate(LocalDate.now());
+
+	@JmsListener(destination = "test.queue")
+	public void consume(String message) {
+		System.out.println(" Unsuccessful order, order Id: " + message);
+
+		Order order = orderService.getOrderById(Integer.parseInt(message));
+
+		order.setOrdStatus(OrdStatusEnum.FAILED);
+		order.setDate(LocalDate.now());
 		order.setTime(LocalTime.now());
-       orderService.addOrder(order);
-       
-    }
+		orderService.addOrder(order);
+
+	}
 }
