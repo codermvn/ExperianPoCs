@@ -1,0 +1,12 @@
+com\example\model\Customer$StatusEnum.class
+com\example\model\InputOrder.class
+com\example\model\InputProduct.class
+com\example\model\OrderProduct.class
+com\example\model\Product.class
+com\example\model\Order$OrdStatusEnum.class
+com\example\model\InputCustomer.class
+com\example\model\Order.class
+com\example\model\Customer.class
+com\example\model\CustomerAmount.class
+com\example\model\ExceptionResponse.class
+com\example\model\InputOrderProduct.class
