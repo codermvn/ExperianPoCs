@@ -14,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -42,7 +43,7 @@ public class Order implements Serializable {
 
 	/* This will create a column cId in OrderTable and stores customerId from customer table which is pkey of Customer*/
 	@OneToOne
-	//@JoinColumn(name="cId", referencedColumnName = "customerId")
+	@JoinColumn(name="cId", referencedColumnName = "customerId")
 	private Customer customer = null;
 
 	@JsonProperty("date")
