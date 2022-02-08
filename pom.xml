@@ -39,13 +39,15 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
+		</dependency> -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
 		</dependency>
-		<!--<dependency> <groupId>org.postgresql</groupId> <artifactId>postgresql</artifactId> 
-			</dependency> -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -80,7 +82,7 @@
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-spring</artifactId>
-			<version>4.3.0</version>
+			<version>6.10.4</version>
 		</dependency>
 
 		<dependency>
@@ -98,25 +100,25 @@
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-java</artifactId>
-			<version>5.2.0</version>
+			<version>6.10.4</version>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-jvm-deps</artifactId>
 			<version>1.0.6</version>
 			<scope>provided</scope>
-		</dependency>
+		</dependency> -->
 		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-jvm -->
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-jvm</artifactId>
-			<version>6.8.1</version>
+			<version>6.10.4</version>
 			<type>pom</type>
 		</dependency>
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-junit</artifactId>
-			<version>5.2.0</version>
+			<version>6.10.4</version>
 			<scope>test</scope>
 		</dependency>
 

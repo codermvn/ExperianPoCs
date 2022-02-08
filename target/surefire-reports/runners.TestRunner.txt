@@ -1,0 +1,7 @@
+-------------------------------------------------------------------------------
+Test set: runners.TestRunner
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 9.373 s <<< FAILURE! - in runners.TestRunner
+Client wants to add a new product in inventory  Time elapsed: 0.211 s  <<< ERROR!
+org.springframework.web.client.HttpClientErrorException$Conflict: 409 : "{"errorMessage":"Duplicate Data","requestedURI":"/addProduct","reason":"product already Exists","errorCode":409}"
+
