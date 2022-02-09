@@ -4,18 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.math.BigDecimal;
 
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.orderservice.OrderServiceApplication;
 import com.example.orderservice.model.InputDeductInventory;
 import com.example.orderservice.model.InputProduct;
 import com.example.orderservice.model.Order;
@@ -24,11 +20,8 @@ import com.example.orderservice.repository.ProductRepository;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.spring.CucumberContextConfiguration;
 
-@CucumberContextConfiguration
-@SpringBootTest(classes = OrderServiceApplication.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-public class StepDefinitionsCucumberConfig {
+public class StepDefinitionsCucumberConfig extends ScenarioConfig{
 
 	protected RestTemplate restTemplate = new RestTemplate();
 

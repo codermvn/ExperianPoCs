@@ -1,3 +1,4 @@
+#This file must be Pretty Formatted, otherwise you can not run this file.
 #Author: your.email@your.domain.com
 #Keywords Summary :
 #Feature: List of scenarios.
@@ -16,47 +17,32 @@
 #""
 ## (Comments)
 #Sample Feature Definition Template
-
 Feature: Order Search
 
-Scenario: Client wants to deduct inventory
-When Client calls /deductInventory/5 with productId as 50
-Then the client receives answer as 1920
+  @SmokeTest
+  Scenario: Client wants to deduct inventory
+    When Client calls /deductInventory/5 with productId as 50
+    Then the client receives answer as 1920
 
-Scenario: Client wants to get a productName from product inventory
-When Client calls /getProduct/50
-Then the client receives answer as T-Shirt
+  @RegularTest
+  Scenario: Client wants to get a productName from product inventory
+    When Client calls /getProduct/50
+    Then the client receives answer as T-Shirt
 
-Scenario: Client wants to delete an order in inventory
-When Client calls /deleteOrder/111
-Then the client receives an order with order status failed
+  @NightlyBuildTest @RegularTest
+  Scenario: Client wants to delete an order in inventory
+    When Client calls /deleteOrder/111
+    Then the client receives an order with order status failed
 
-Scenario: Client wants to get an order
-When Client calls /getOrder/108
-Then the client receives an Order
+  @RegularTest @SmokeTest
+  Scenario: Client wants to get an order
+    When Client calls /getOrder/108
+    Then the client receives an Order
 
-Scenario: Client wants to add a new product in inventory
-When Client calls /addProduct with  productName "Laptop", productPrice 50000.000,company "HP", inventory as 10
-Then new product is added into inventory
-
-
-
-#Scenario: Client wants to deduct inventory
-#When Client calls /deductInventory/5 with productId as 185
-#Then the client receives answer as 1990
-
-#Scenario: Client wants to get a productName from product inventory
-#When Client calls /getProduct/185
-#Then the client receives answer as T-shirt
-
-#Scenario: Client wants to add a new product in inventory
-#When Client calls /addProduct with  productName "Laptop", productPrice 50000.000,company "HP", inventory as 10
-#Then new product is added into inventory
-
-#Scenario: Client wants to delete an order in inventory
-#When Client calls /deleteOrder/526
-#Then the client receives an order with order status failed
-
+  @RegularTest
+  Scenario: Client wants to add a new product in inventory
+    When Client calls /addProduct with  productName "Laptop", productPrice 50000.000,company "HP", inventory as 10
+    Then new product is added into inventory
 #Scenario: Client wants to get an order
 #When Client calls /getOrder/526
 #Then the client receives an Order

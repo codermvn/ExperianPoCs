@@ -3,7 +3,7 @@ order-service,com.example.orderservice.util,ProductValidator,3,26,2,6,1,4,3,3,1,
 order-service,com.example.orderservice.util,OrderValidator,50,0,12,0,13,0,9,0,3,0
 order-service,com.example.orderservice.config,Config,0,28,0,0,0,7,0,5,0,5
 order-service,com.example.orderservice.transformer,CreateOrderTransformer,135,0,6,0,36,0,8,0,5,0
-order-service,com.example.orderservice.service,ProductService,56,65,4,2,15,15,4,4,1,4
+order-service,com.example.orderservice.service,ProductService,25,96,3,3,7,23,3,5,0,5
 order-service,com.example.orderservice.service,OrderService,153,38,0,0,37,11,2,3,2,3
 order-service,com.example.orderservice.controller,DeleteOrderByIdController,0,15,0,0,0,3,0,2,0,2
 order-service,com.example.orderservice.controller,GetOrderByIdController,0,15,0,0,0,3,0,2,0,2

@@ -3,8 +3,8 @@
     "line": 20,
     "elements": [
       {
-        "start_timestamp": "2022-02-09T08:33:22.038Z",
-        "line": 22,
+        "start_timestamp": "2022-02-09T12:01:34.347Z",
+        "line": 23,
         "name": "Client wants to deduct inventory",
         "description": "",
         "id": "order-search;client-wants-to-deduct-inventory",
@@ -13,10 +13,10 @@
         "steps": [
           {
             "result": {
-              "duration": 462171800,
+              "duration": 509105100,
               "status": "passed"
             },
-            "line": 23,
+            "line": 24,
             "name": "Client calls /deductInventory/5 with productId as 50",
             "match": {
               "arguments": [
@@ -35,10 +35,9 @@
           },
           {
             "result": {
-              "duration": 999800,
               "status": "passed"
             },
-            "line": 24,
+            "line": 25,
             "name": "the client receives answer as 1920",
             "match": {
               "arguments": [
@@ -51,11 +50,16 @@
             },
             "keyword": "Then "
           }
+        ],
+        "tags": [
+          {
+            "name": "@SmokeTest"
+          }
         ]
       },
       {
-        "start_timestamp": "2022-02-09T08:33:22.620Z",
-        "line": 26,
+        "start_timestamp": "2022-02-09T12:01:34.979Z",
+        "line": 28,
         "name": "Client wants to get a productName from product inventory",
         "description": "",
         "id": "order-search;client-wants-to-get-a-productname-from-product-inventory",
@@ -64,10 +68,10 @@
         "steps": [
           {
             "result": {
-              "duration": 18008600,
+              "duration": 18039900,
               "status": "passed"
             },
-            "line": 27,
+            "line": 29,
             "name": "Client calls /getProduct/50",
             "match": {
               "arguments": [
@@ -82,21 +86,26 @@
           },
           {
             "result": {
-              "duration": 3998900,
+              "duration": 3913400,
               "status": "passed"
             },
-            "line": 28,
+            "line": 30,
             "name": "the client receives answer as T-Shirt",
             "match": {
               "location": "stepDefinitions.StepDefinitionsCucumberConfig.the_client_receives_answer_as_T_shirt()"
             },
             "keyword": "Then "
           }
+        ],
+        "tags": [
+          {
+            "name": "@RegularTest"
+          }
         ]
       },
       {
-        "start_timestamp": "2022-02-09T08:33:22.661Z",
-        "line": 30,
+        "start_timestamp": "2022-02-09T12:01:35.019Z",
+        "line": 33,
         "name": "Client wants to delete an order in inventory",
         "description": "",
         "id": "order-search;client-wants-to-delete-an-order-in-inventory",
@@ -105,10 +114,10 @@
         "steps": [
           {
             "result": {
-              "duration": 100000500,
+              "duration": 118000200,
               "status": "passed"
             },
-            "line": 31,
+            "line": 34,
             "name": "Client calls /deleteOrder/111",
             "match": {
               "arguments": [
@@ -123,21 +132,28 @@
           },
           {
             "result": {
-              "duration": 629600,
               "status": "passed"
             },
-            "line": 32,
+            "line": 35,
             "name": "the client receives an order with order status failed",
             "match": {
               "location": "stepDefinitions.StepDefinitionsCucumberConfig.the_client_receives_an_order_with_order_status_failed()"
             },
             "keyword": "Then "
           }
+        ],
+        "tags": [
+          {
+            "name": "@NightlyBuildTest"
+          },
+          {
+            "name": "@RegularTest"
+          }
         ]
       },
       {
-        "start_timestamp": "2022-02-09T08:33:22.778Z",
-        "line": 34,
+        "start_timestamp": "2022-02-09T12:01:35.160Z",
+        "line": 38,
         "name": "Client wants to get an order",
         "description": "",
         "id": "order-search;client-wants-to-get-an-order",
@@ -146,10 +162,10 @@
         "steps": [
           {
             "result": {
-              "duration": 28101900,
+              "duration": 35990100,
               "status": "passed"
             },
-            "line": 35,
+            "line": 39,
             "name": "Client calls /getOrder/108",
             "match": {
               "arguments": [
@@ -164,21 +180,29 @@
           },
           {
             "result": {
-              "duration": 1061200,
+              "duration": 1999800,
               "status": "passed"
             },
-            "line": 36,
+            "line": 40,
             "name": "the client receives an Order",
             "match": {
               "location": "stepDefinitions.StepDefinitionsCucumberConfig.the_client_receives_an_Order()"
             },
             "keyword": "Then "
           }
+        ],
+        "tags": [
+          {
+            "name": "@RegularTest"
+          },
+          {
+            "name": "@SmokeTest"
+          }
         ]
       },
       {
-        "start_timestamp": "2022-02-09T08:33:22.833Z",
-        "line": 38,
+        "start_timestamp": "2022-02-09T12:01:35.221Z",
+        "line": 43,
         "name": "Client wants to add a new product in inventory",
         "description": "",
         "id": "order-search;client-wants-to-add-a-new-product-in-inventory",
@@ -187,11 +211,10 @@
         "steps": [
           {
             "result": {
-              "error_message": "org.springframework.web.client.HttpClientErrorException$Conflict: 409 : \"{\"errorMessage\":\"Duplicate Data\",\"requestedURI\":\"/addProduct\",\"reason\":\"product already Exists\",\"errorCode\":409}\"\r\n\tat org.springframework.web.client.HttpClientErrorException.create(HttpClientErrorException.java:125)\r\n\tat org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:168)\r\n\tat org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:122)\r\n\tat org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63)\r\n\tat org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:819)\r\n\tat org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:777)\r\n\tat org.springframework.web.client.RestTemplate.execute(RestTemplate.java:711)\r\n\tat org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:602)\r\n\tat stepDefinitions.StepDefinitionsCucumberConfig.client_calls_addProduct_with_productName_productPrice_company_inventory_as(StepDefinitionsCucumberConfig.java:187)\r\n\tat ✽.Client calls /addProduct with  productName \"Laptop\", productPrice 50000.000,company \"HP\", inventory as 10(file:///D:/workspace/experianpoc_ordserv/ExperianPoCs/src/test/resources/functionalTests/End2End_Test.feature:39)\r\n",
-              "duration": 62000000,
-              "status": "failed"
+              "duration": 64003200,
+              "status": "passed"
             },
-            "line": 39,
+            "line": 44,
             "name": "Client calls /addProduct with  productName \"Laptop\", productPrice 50000.000,company \"HP\", inventory as 10",
             "match": {
               "arguments": [
@@ -218,14 +241,20 @@
           },
           {
             "result": {
-              "status": "skipped"
+              "duration": 14998900,
+              "status": "passed"
             },
-            "line": 40,
+            "line": 45,
             "name": "new product is added into inventory",
             "match": {
               "location": "stepDefinitions.StepDefinitionsCucumberConfig.new_product_is_added_into_inventory()"
             },
             "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@RegularTest"
           }
         ]
       }
@@ -235,6 +264,107 @@
     "id": "order-search",
     "keyword": "Feature",
     "uri": "file:src/test/resources/functionalTests/End2End_Test.feature",
+    "tags": []
+  },
+  {
+    "line": 19,
+    "elements": [
+      {
+        "start_timestamp": "2022-02-09T12:01:35.319Z",
+        "line": 28,
+        "name": "Client wants to get a productName from product inventory",
+        "description": "",
+        "id": "product-search;client-wants-to-get-a-productname-from-product-inventory;;2",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 17064400,
+              "status": "passed"
+            },
+            "line": 23,
+            "name": "Client calls getProduct with product id as 50",
+            "match": {
+              "arguments": [
+                {
+                  "val": "50",
+                  "offset": 43
+                }
+              ],
+              "location": "stepDefinitions.ScenarioOutlineFeatureConfig.client_calls_get_product_with_product_id_as(java.lang.Integer)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 24,
+            "name": "the client receives the product",
+            "match": {
+              "location": "stepDefinitions.ScenarioOutlineFeatureConfig.the_client_receives_the_product()"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@RegularTest"
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2022-02-09T12:01:35.353Z",
+        "line": 29,
+        "name": "Client wants to get a productName from product inventory",
+        "description": "",
+        "id": "product-search;client-wants-to-get-a-productname-from-product-inventory;;3",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 16000100,
+              "status": "passed"
+            },
+            "line": 23,
+            "name": "Client calls getProduct with product id as 73",
+            "match": {
+              "arguments": [
+                {
+                  "val": "73",
+                  "offset": 43
+                }
+              ],
+              "location": "stepDefinitions.ScenarioOutlineFeatureConfig.client_calls_get_product_with_product_id_as(java.lang.Integer)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 24,
+            "name": "the client receives the product",
+            "match": {
+              "location": "stepDefinitions.ScenarioOutlineFeatureConfig.the_client_receives_the_product()"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@RegularTest"
+          }
+        ]
+      }
+    ],
+    "name": "Product Search",
+    "description": "",
+    "id": "product-search",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/functionalTests/ScenarioOutline.feature",
     "tags": []
   }
 ]
