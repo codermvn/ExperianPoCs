@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrderService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">order-service</a> &gt; <a href="index.source.html" class="el_package">com.example.orderservice.service</a> &gt; <span class="el_source">OrderService.java</span></div><h1>OrderService.java</h1><pre class="source lang-java linenums">package com.example.orderservice.service;
+
+import javax.jms.Queue;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.client.RestTemplate;
+
+import com.example.orderservice.exception.CustomException;
+import com.example.orderservice.exception.CustomerNotFoundException;
+import com.example.orderservice.exception.InsufficientBalanceException;
+import com.example.orderservice.model.Customer;
+import com.example.orderservice.model.CustomerAmount;
+import com.example.orderservice.model.InputOrder;
+import com.example.orderservice.model.Order;
+import com.example.orderservice.model.Order.OrdStatusEnum;
+import com.example.orderservice.repository.OrderRepository;
+import com.example.orderservice.transformer.CreateOrderTransformer;
+import com.example.orderservice.util.OrderValidator;
+
+@Service
+<span class="fc" id="L29">public class OrderService {</span>
+
+	@Autowired
+	OrderRepository orderRepository;
+	
+	@Autowired
+	 Queue queue;
+		
+	@Autowired
+	JmsTemplate jmsTemplate;
+
+	@Autowired
+	private RestTemplate restTemplate;
+	
+	@Autowired
+	private ProductService productService;
+	
+	@Value(&quot;${customer.host}&quot;)
+	String host;
+	
+	@Value(&quot;${customer.port}&quot;)
+	String port;
+
+	public Order addOrder(Order order) {
+<span class="nc" id="L53">		Order addedOrder = null;</span>
+		try {
+<span class="nc" id="L55">			addedOrder = orderRepository.save(order);</span>
+<span class="nc" id="L56">		} catch (Exception e) {</span>
+<span class="nc" id="L57">			System.out.println(e);</span>
+<span class="nc" id="L58">		}</span>
+<span class="nc" id="L59">		return addedOrder;</span>
+	}
+
+	public Order getOrderById(int id) {
+<span class="fc" id="L63">		Order order = null;</span>
+		try {
+<span class="fc" id="L65">			order = orderRepository.findById(id).get();</span>
+<span class="nc" id="L66">		} catch (Exception e) {</span>
+<span class="nc" id="L67">			throw new CustomerNotFoundException(&quot;order not found&quot;);</span>
+<span class="fc" id="L68">		}</span>
+<span class="fc" id="L69">		return order;</span>
+	}
+
+	public Order deleteOrderById(int id) {
+<span class="fc" id="L73">		Order deletedOrder = null;</span>
+		try {
+<span class="fc" id="L75">			Order order = orderRepository.findById(id).get();</span>
+<span class="fc" id="L76">			order.setOrdStatus(OrdStatusEnum.FAILED);</span>
+<span class="fc" id="L77">			deletedOrder = orderRepository.save(order);</span>
+<span class="nc" id="L78">		} catch (Exception e) {</span>
+<span class="nc" id="L79">			throw new CustomerNotFoundException(&quot;order not found&quot;);</span>
+<span class="fc" id="L80">		}</span>
+<span class="fc" id="L81">		return deletedOrder;</span>
+	}
+	
+	//@Transactional(rollbackFor = { InsufficientBalanceException.class })
+	public Order createOrderWithException(@RequestBody InputOrder inputOrder, String token)  {
+
+<span class="nc" id="L87">		OrderValidator.validateOrder(inputOrder);</span>
+<span class="nc" id="L88">		Integer customerId = inputOrder.getCustomerId();</span>
+<span class="nc" id="L89">		Customer customer = null;</span>
+	//	customer.setCustomerId(customerId);
+		
+		try {
+		//customer = restTemplate.getForObject(&quot;http://localhost:8082/getCustomer/{customerId}&quot;,
+		//Customer.class, customerId);
+		
+<span class="nc" id="L96">		HttpHeaders headers = new HttpHeaders();</span>
+<span class="nc" id="L97">		headers.set(&quot;Authorization&quot;, token);</span>
+
+<span class="nc" id="L99">		HttpEntity entity = new HttpEntity(headers);</span>
+		
+<span class="nc" id="L101">		ResponseEntity&lt;Customer&gt; customerResponse = restTemplate.exchange(</span>
+				&quot;http://&quot;+host+&quot;:&quot;+port+&quot;/getCustomer/{customerId}&quot;,
+		        HttpMethod.GET,
+		        entity,
+		        Customer.class,
+		        customerId
+		);
+
+<span class="nc" id="L109">		customer = customerResponse.getBody();</span>
+
+     	}
+<span class="nc" id="L112">     	catch (Exception e) {</span>
+<span class="nc" id="L113">		System.out.println(&quot;Some error occured&quot;);</span>
+<span class="nc" id="L114">		throw new CustomException(&quot;Some error occured in CustomerService&quot;);</span>
+<span class="nc" id="L115">		}	</span>
+		
+<span class="nc" id="L117">CreateOrderTransformer transformer = CreateOrderTransformer.getInstance(restTemplate,productService);</span>
+		
+<span class="nc" id="L119">		Order order = transformer.populateOrder(inputOrder, customer);</span>
+<span class="nc" id="L120">		Order addOrder = addOrder(order);</span>
+		
+<span class="nc" id="L122">		CustomerAmount customerAmount = new CustomerAmount();</span>
+<span class="nc" id="L123">		customerAmount.setCustomerId(customerId);</span>
+<span class="nc" id="L124">		customerAmount.setValue(order.getOrderValue());</span>
+
+		/**
+		 * below will debit amount from customer.
+		 */
+		try {
+<span class="nc" id="L130">			Customer updatedCustomer = restTemplate.postForObject(&quot;http://localhost:8082/debit&quot;, customerAmount,</span>
+					Customer.class);
+<span class="nc" id="L132">		} catch (Exception e) {</span>
+<span class="nc" id="L133">			System.out.println(&quot;insufficient balance to book order&quot;);</span>
+<span class="nc" id="L134">			jmsTemplate.convertAndSend(queue,order.getOrderId());</span>
+<span class="nc" id="L135">			throw new InsufficientBalanceException(&quot;balance insufficient&quot;);</span>
+<span class="nc" id="L136">		}</span>
+		
+<span class="nc" id="L138">		transformer.deductInventoryFromProduct(inputOrder);</span>
+<span class="nc" id="L139">		addOrder.setOrdStatus(OrdStatusEnum.SUCCESS);</span>
+<span class="nc" id="L140">		return addOrder(order);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

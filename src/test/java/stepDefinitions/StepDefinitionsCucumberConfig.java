@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.math.BigDecimal;
 
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -19,6 +20,7 @@ import com.example.orderservice.model.InputDeductInventory;
 import com.example.orderservice.model.InputProduct;
 import com.example.orderservice.model.Order;
 import com.example.orderservice.model.Product;
+import com.example.orderservice.repository.ProductRepository;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -32,6 +34,9 @@ public class StepDefinitionsCucumberConfig {
 
 	protected final String DEFAULT_URL = "http://localhost:8085/deductInventory/{qty}";
 
+	@Autowired
+	ProductRepository productRepository;
+	
 	ResponseEntity<Product> response;
 	String url = DEFAULT_URL;
 
@@ -185,5 +190,11 @@ public class StepDefinitionsCucumberConfig {
 	@Then("new product is added into inventory")
 	public void new_product_is_added_into_inventory() {
 		//assertEquals("Laptop", response.getBody().getProductName());
+			// assertEquals("Laptop", response.getBody().getProductName());
+			System.out.println("productId = " + responseAddProduct.getBody().getProductId());
+			int productId = responseAddProduct.getBody().getProductId();
+			productRepository.deleteById(productId);
 	}
+	
+	//Tear down concept to delete data from db.
 }

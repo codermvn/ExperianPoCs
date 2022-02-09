@@ -1,3 +1,11 @@
-runners\TestRunner.class
 stepDefinitions\StepDefinitionsCucumberConfig.class
+com\example\orderservice\controller\GetOrderByIdControllerTest.class
+runners\TestRunner.class
+com\example\orderservice\controller\CreateOrderControllerTest.class
+com\example\orderservice\service\OrderServiceTest.class
+com\example\orderservice\controller\DeleteOrderByIdControllerTest.class
+com\example\orderservice\service\ProductServiceTest.class
 com\example\orderservice\OrderServiceApplicationTests.class
+com\example\orderservice\util\ProductValidatorTest.class
+com\example\orderservice\controller\AddProductControllerTest.class
+com\example\orderservice\controller\GetProductByIdControllerTest.class

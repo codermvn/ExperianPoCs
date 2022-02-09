@@ -1,0 +1,240 @@
+[
+  {
+    "line": 20,
+    "elements": [
+      {
+        "start_timestamp": "2022-02-09T08:33:22.038Z",
+        "line": 22,
+        "name": "Client wants to deduct inventory",
+        "description": "",
+        "id": "order-search;client-wants-to-deduct-inventory",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 462171800,
+              "status": "passed"
+            },
+            "line": 23,
+            "name": "Client calls /deductInventory/5 with productId as 50",
+            "match": {
+              "arguments": [
+                {
+                  "val": "5",
+                  "offset": 30
+                },
+                {
+                  "val": "50",
+                  "offset": 50
+                }
+              ],
+              "location": "stepDefinitions.StepDefinitionsCucumberConfig.client_calls_deductInventory_with_productId_as(java.lang.Integer,java.lang.Integer)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 999800,
+              "status": "passed"
+            },
+            "line": 24,
+            "name": "the client receives answer as 1920",
+            "match": {
+              "arguments": [
+                {
+                  "val": "1920",
+                  "offset": 30
+                }
+              ],
+              "location": "stepDefinitions.StepDefinitionsCucumberConfig.the_client_receives_answer_as(java.lang.Integer)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2022-02-09T08:33:22.620Z",
+        "line": 26,
+        "name": "Client wants to get a productName from product inventory",
+        "description": "",
+        "id": "order-search;client-wants-to-get-a-productname-from-product-inventory",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 18008600,
+              "status": "passed"
+            },
+            "line": 27,
+            "name": "Client calls /getProduct/50",
+            "match": {
+              "arguments": [
+                {
+                  "val": "50",
+                  "offset": 25
+                }
+              ],
+              "location": "stepDefinitions.StepDefinitionsCucumberConfig.client_calls_getProduct(java.lang.Integer)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 3998900,
+              "status": "passed"
+            },
+            "line": 28,
+            "name": "the client receives answer as T-Shirt",
+            "match": {
+              "location": "stepDefinitions.StepDefinitionsCucumberConfig.the_client_receives_answer_as_T_shirt()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2022-02-09T08:33:22.661Z",
+        "line": 30,
+        "name": "Client wants to delete an order in inventory",
+        "description": "",
+        "id": "order-search;client-wants-to-delete-an-order-in-inventory",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 100000500,
+              "status": "passed"
+            },
+            "line": 31,
+            "name": "Client calls /deleteOrder/111",
+            "match": {
+              "arguments": [
+                {
+                  "val": "111",
+                  "offset": 26
+                }
+              ],
+              "location": "stepDefinitions.StepDefinitionsCucumberConfig.client_calls_deleteOrder(java.lang.Integer)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 629600,
+              "status": "passed"
+            },
+            "line": 32,
+            "name": "the client receives an order with order status failed",
+            "match": {
+              "location": "stepDefinitions.StepDefinitionsCucumberConfig.the_client_receives_an_order_with_order_status_failed()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2022-02-09T08:33:22.778Z",
+        "line": 34,
+        "name": "Client wants to get an order",
+        "description": "",
+        "id": "order-search;client-wants-to-get-an-order",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 28101900,
+              "status": "passed"
+            },
+            "line": 35,
+            "name": "Client calls /getOrder/108",
+            "match": {
+              "arguments": [
+                {
+                  "val": "108",
+                  "offset": 23
+                }
+              ],
+              "location": "stepDefinitions.StepDefinitionsCucumberConfig.client_calls_getOrder(java.lang.Integer)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 1061200,
+              "status": "passed"
+            },
+            "line": 36,
+            "name": "the client receives an Order",
+            "match": {
+              "location": "stepDefinitions.StepDefinitionsCucumberConfig.the_client_receives_an_Order()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2022-02-09T08:33:22.833Z",
+        "line": 38,
+        "name": "Client wants to add a new product in inventory",
+        "description": "",
+        "id": "order-search;client-wants-to-add-a-new-product-in-inventory",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "error_message": "org.springframework.web.client.HttpClientErrorException$Conflict: 409 : \"{\"errorMessage\":\"Duplicate Data\",\"requestedURI\":\"/addProduct\",\"reason\":\"product already Exists\",\"errorCode\":409}\"\r\n\tat org.springframework.web.client.HttpClientErrorException.create(HttpClientErrorException.java:125)\r\n\tat org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:168)\r\n\tat org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:122)\r\n\tat org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63)\r\n\tat org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:819)\r\n\tat org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:777)\r\n\tat org.springframework.web.client.RestTemplate.execute(RestTemplate.java:711)\r\n\tat org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:602)\r\n\tat stepDefinitions.StepDefinitionsCucumberConfig.client_calls_addProduct_with_productName_productPrice_company_inventory_as(StepDefinitionsCucumberConfig.java:187)\r\n\tat ✽.Client calls /addProduct with  productName \"Laptop\", productPrice 50000.000,company \"HP\", inventory as 10(file:///D:/workspace/experianpoc_ordserv/ExperianPoCs/src/test/resources/functionalTests/End2End_Test.feature:39)\r\n",
+              "duration": 62000000,
+              "status": "failed"
+            },
+            "line": 39,
+            "name": "Client calls /addProduct with  productName \"Laptop\", productPrice 50000.000,company \"HP\", inventory as 10",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Laptop\"",
+                  "offset": 43
+                },
+                {
+                  "val": "50000.000",
+                  "offset": 66
+                },
+                {
+                  "val": "\"HP\"",
+                  "offset": 84
+                },
+                {
+                  "val": "10",
+                  "offset": 103
+                }
+              ],
+              "location": "stepDefinitions.StepDefinitionsCucumberConfig.client_calls_addProduct_with_productName_productPrice_company_inventory_as(java.lang.String,java.math.BigDecimal,java.lang.String,java.lang.Integer)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 40,
+            "name": "new product is added into inventory",
+            "match": {
+              "location": "stepDefinitions.StepDefinitionsCucumberConfig.new_product_is_added_into_inventory()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "Order Search",
+    "description": "",
+    "id": "order-search",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/functionalTests/End2End_Test.feature",
+    "tags": []
+  }
+]

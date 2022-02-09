@@ -10,7 +10,9 @@ import io.cucumber.junit.CucumberOptions;
 @CucumberOptions(
         features = "src/test/resources/functionalTests/End2End_Test.feature",
         glue = { "stepDefinitions"},
-        		plugin = { "pretty","html:target/Destination" })
+        		plugin = {"pretty", "html:target/cucumber-reports","json:target/cucumber.json"},
+        		dryRun= false,
+        		monochrome= true)
 
 public class TestRunner {
 

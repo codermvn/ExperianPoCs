@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProductService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">order-service</a> &gt; <a href="index.source.html" class="el_package">com.example.orderservice.service</a> &gt; <span class="el_source">ProductService.java</span></div><h1>ProductService.java</h1><pre class="source lang-java linenums">package com.example.orderservice.service;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.example.orderservice.exception.CustomSQLException;
+import com.example.orderservice.exception.CustomerNotFoundException;
+import com.example.orderservice.exception.DataAlreadyExistsException;
+import com.example.orderservice.model.InputProduct;
+import com.example.orderservice.model.Product;
+import com.example.orderservice.repository.ProductRepository;
+import com.example.orderservice.util.ProductValidator;
+
+@Service
+<span class="fc" id="L18">public class ProductService {</span>
+
+	@Autowired
+	ProductRepository productRepository;
+	
+	public Product getProductById(int id) {
+<span class="fc" id="L24">		Product product = null;</span>
+		try {
+<span class="fc" id="L26">			product = productRepository.findByProductId(id);</span>
+<span class="nc" id="L27">		} catch (Exception e) {</span>
+<span class="nc" id="L28">			throw new CustomerNotFoundException(&quot;product not found&quot;);</span>
+<span class="fc" id="L29">		}</span>
+<span class="fc" id="L30">		return product;</span>
+	}
+	
+	public Product addProduct(@Valid InputProduct inputProduct) {
+<span class="nc" id="L34">		Product product = new Product();</span>
+<span class="nc" id="L35">		product.setProductName(inputProduct.getProductName());</span>
+<span class="nc" id="L36">		product.setProductPrice(inputProduct.getProductPrice());</span>
+<span class="nc" id="L37">		product.setCompany(inputProduct.getCompany());</span>
+<span class="nc" id="L38">		product.setInventory(inputProduct.getInventory());</span>
+<span class="nc" id="L39">		return productRepository.save(product);</span>
+	}
+	
+	public Product deductInventory(Integer productId, Integer quantity) {
+<span class="fc" id="L43">		Product product = getProductById(productId);</span>
+<span class="pc bpc" id="L44" title="1 of 2 branches missed.">		if(product.getInventory() - quantity &gt;= 0) {</span>
+<span class="fc" id="L45">		  product.setInventory(product.getInventory() - quantity);</span>
+		}
+		else {
+<span class="nc" id="L48">			System.out.println(&quot;required qty is not present&quot;);</span>
+		}
+<span class="fc" id="L50">		return productRepository.save(product);</span>
+	}
+	
+	@Transactional(rollbackFor = {CustomSQLException.class})
+	public Product createProduct(@Valid InputProduct inputProduct) {
+		/**
+		 *	below throws 400 for invalid input
+		 */
+<span class="fc" id="L58">		ProductValidator.validateProduct(inputProduct);</span>
+				
+<span class="fc" id="L60">		Product existingProduct = productRepository.findByProductNameAndProductPriceAndCompany(inputProduct.getProductName(), inputProduct.getProductPrice(), inputProduct.getCompany());</span>
+<span class="fc" id="L61">		Product addedProduct = null;</span>
+		
+<span class="pc bpc" id="L63" title="1 of 2 branches missed.">		if (existingProduct == null) {</span>
+<span class="nc" id="L64">			addedProduct = addProduct(inputProduct);</span>
+<span class="nc" id="L65">			System.out.println(&quot;Product successfully added&quot;);</span>
+			
+<span class="nc bnc" id="L67" title="All 2 branches missed.">          if(addedProduct.getInventory() &lt; 0 ) {</span>
+<span class="nc" id="L68">        	  System.out.println(&quot;Inventory can not be negative&quot;);</span>
+<span class="nc" id="L69">        	  throw new CustomSQLException(&quot;Throwing exception for Rollback&quot;);</span>
+          }  
+			
+		} else {
+<span class="fc" id="L73">				System.out.println(&quot;This product already exists!&quot;);</span>
+<span class="fc" id="L74">				throw new DataAlreadyExistsException(&quot;product already Exists&quot;);</span>
+			}
+<span class="nc" id="L76">		return addedProduct; </span>
+		}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
