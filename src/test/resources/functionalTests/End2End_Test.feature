@@ -39,7 +39,7 @@ Feature: Order Search
     When Client calls /getOrder/108
     Then the client receives an Order
 
-  @RegularTest
+  @RegularTest @DbAddTest
   Scenario: Client wants to add a new product in inventory
     When Client calls /addProduct with  productName "Laptop", productPrice 50000.000,company "HP", inventory as 10
     Then new product is added into inventory

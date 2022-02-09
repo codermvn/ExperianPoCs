@@ -18,10 +18,12 @@ import com.example.orderservice.model.Order;
 import com.example.orderservice.model.Product;
 import com.example.orderservice.repository.ProductRepository;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class StepDefinitionsCucumberConfig extends ScenarioConfig{
+public class StepDefinitionsCucumberConfig extends ScenarioConfig {
 
 	protected RestTemplate restTemplate = new RestTemplate();
 
@@ -184,10 +186,16 @@ public class StepDefinitionsCucumberConfig extends ScenarioConfig{
 	public void new_product_is_added_into_inventory() {
 		//assertEquals("Laptop", response.getBody().getProductName());
 			// assertEquals("Laptop", response.getBody().getProductName());
-			System.out.println("productId = " + responseAddProduct.getBody().getProductId());
-			int productId = responseAddProduct.getBody().getProductId();
-			productRepository.deleteById(productId);
+			//System.out.println("productId = " + responseAddProduct.getBody().getProductId());
+			//int productId = responseAddProduct.getBody().getProductId();
+			//productRepository.deleteById(productId);
 	}
-	
+
+	@After("@DbAddTest")
+	public void after(Scenario scenario) {
+		System.out.println("productId = " + responseAddProduct.getBody().getProductId());
+		int productId = responseAddProduct.getBody().getProductId();
+		productRepository.deleteById(productId);
+	}
 	//Tear down concept to delete data from db.
 }

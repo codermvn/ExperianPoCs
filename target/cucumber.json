@@ -3,7 +3,7 @@
     "line": 20,
     "elements": [
       {
-        "start_timestamp": "2022-02-09T12:01:34.347Z",
+        "start_timestamp": "2022-02-09T13:22:56.527Z",
         "line": 23,
         "name": "Client wants to deduct inventory",
         "description": "",
@@ -13,7 +13,7 @@
         "steps": [
           {
             "result": {
-              "duration": 509105100,
+              "duration": 451570400,
               "status": "passed"
             },
             "line": 24,
@@ -35,6 +35,7 @@
           },
           {
             "result": {
+              "duration": 1003100,
               "status": "passed"
             },
             "line": 25,
@@ -58,7 +59,7 @@
         ]
       },
       {
-        "start_timestamp": "2022-02-09T12:01:34.979Z",
+        "start_timestamp": "2022-02-09T13:22:57.075Z",
         "line": 28,
         "name": "Client wants to get a productName from product inventory",
         "description": "",
@@ -68,7 +69,7 @@
         "steps": [
           {
             "result": {
-              "duration": 18039900,
+              "duration": 11003700,
               "status": "passed"
             },
             "line": 29,
@@ -86,7 +87,7 @@
           },
           {
             "result": {
-              "duration": 3913400,
+              "duration": 2001600,
               "status": "passed"
             },
             "line": 30,
@@ -104,7 +105,7 @@
         ]
       },
       {
-        "start_timestamp": "2022-02-09T12:01:35.019Z",
+        "start_timestamp": "2022-02-09T13:22:57.101Z",
         "line": 33,
         "name": "Client wants to delete an order in inventory",
         "description": "",
@@ -114,7 +115,7 @@
         "steps": [
           {
             "result": {
-              "duration": 118000200,
+              "duration": 86001600,
               "status": "passed"
             },
             "line": 34,
@@ -152,7 +153,7 @@
         ]
       },
       {
-        "start_timestamp": "2022-02-09T12:01:35.160Z",
+        "start_timestamp": "2022-02-09T13:22:57.199Z",
         "line": 38,
         "name": "Client wants to get an order",
         "description": "",
@@ -162,7 +163,7 @@
         "steps": [
           {
             "result": {
-              "duration": 35990100,
+              "duration": 24999600,
               "status": "passed"
             },
             "line": 39,
@@ -180,7 +181,7 @@
           },
           {
             "result": {
-              "duration": 1999800,
+              "duration": 2000400,
               "status": "passed"
             },
             "line": 40,
@@ -201,17 +202,28 @@
         ]
       },
       {
-        "start_timestamp": "2022-02-09T12:01:35.221Z",
+        "start_timestamp": "2022-02-09T13:22:57.247Z",
         "line": 43,
         "name": "Client wants to add a new product in inventory",
         "description": "",
         "id": "order-search;client-wants-to-add-a-new-product-in-inventory",
+        "after": [
+          {
+            "result": {
+              "duration": 11088600,
+              "status": "passed"
+            },
+            "match": {
+              "location": "stepDefinitions.StepDefinitionsCucumberConfig.after(io.cucumber.java.Scenario)"
+            }
+          }
+        ],
         "type": "scenario",
         "keyword": "Scenario",
         "steps": [
           {
             "result": {
-              "duration": 64003200,
+              "duration": 59000700,
               "status": "passed"
             },
             "line": 44,
@@ -241,7 +253,6 @@
           },
           {
             "result": {
-              "duration": 14998900,
               "status": "passed"
             },
             "line": 45,
@@ -255,6 +266,9 @@
         "tags": [
           {
             "name": "@RegularTest"
+          },
+          {
+            "name": "@DbAddTest"
           }
         ]
       }
@@ -270,7 +284,7 @@
     "line": 19,
     "elements": [
       {
-        "start_timestamp": "2022-02-09T12:01:35.319Z",
+        "start_timestamp": "2022-02-09T13:22:57.331Z",
         "line": 28,
         "name": "Client wants to get a productName from product inventory",
         "description": "",
@@ -280,7 +294,7 @@
         "steps": [
           {
             "result": {
-              "duration": 17064400,
+              "duration": 14995200,
               "status": "passed"
             },
             "line": 23,
@@ -315,7 +329,7 @@
         ]
       },
       {
-        "start_timestamp": "2022-02-09T12:01:35.353Z",
+        "start_timestamp": "2022-02-09T13:22:57.362Z",
         "line": 29,
         "name": "Client wants to get a productName from product inventory",
         "description": "",
@@ -325,7 +339,7 @@
         "steps": [
           {
             "result": {
-              "duration": 16000100,
+              "duration": 15000100,
               "status": "passed"
             },
             "line": 23,
@@ -343,6 +357,7 @@
           },
           {
             "result": {
+              "duration": 1000100,
               "status": "passed"
             },
             "line": 24,
