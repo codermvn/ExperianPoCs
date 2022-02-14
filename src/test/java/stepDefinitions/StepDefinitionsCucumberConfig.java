@@ -196,6 +196,8 @@ public class StepDefinitionsCucumberConfig extends ScenarioConfig {
 		System.out.println("productId = " + responseAddProduct.getBody().getProductId());
 		int productId = responseAddProduct.getBody().getProductId();
 		productRepository.deleteById(productId);
+		
+		scenario.attach("test data", MediaType.APPLICATION_JSON_VALUE.toString(), "Test.json");
 	}
 	//Tear down concept to delete data from db.
 }

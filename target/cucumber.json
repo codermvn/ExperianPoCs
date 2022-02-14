@@ -3,7 +3,7 @@
     "line": 20,
     "elements": [
       {
-        "start_timestamp": "2022-02-09T13:22:56.527Z",
+        "start_timestamp": "2022-02-14T08:52:21.428Z",
         "line": 23,
         "name": "Client wants to deduct inventory",
         "description": "",
@@ -13,7 +13,7 @@
         "steps": [
           {
             "result": {
-              "duration": 451570400,
+              "duration": 459663600,
               "status": "passed"
             },
             "line": 24,
@@ -35,7 +35,7 @@
           },
           {
             "result": {
-              "duration": 1003100,
+              "duration": 1025600,
               "status": "passed"
             },
             "line": 25,
@@ -59,7 +59,7 @@
         ]
       },
       {
-        "start_timestamp": "2022-02-09T13:22:57.075Z",
+        "start_timestamp": "2022-02-14T08:52:22.003Z",
         "line": 28,
         "name": "Client wants to get a productName from product inventory",
         "description": "",
@@ -69,7 +69,7 @@
         "steps": [
           {
             "result": {
-              "duration": 11003700,
+              "duration": 19998900,
               "status": "passed"
             },
             "line": 29,
@@ -87,7 +87,7 @@
           },
           {
             "result": {
-              "duration": 2001600,
+              "duration": 4007100,
               "status": "passed"
             },
             "line": 30,
@@ -105,7 +105,7 @@
         ]
       },
       {
-        "start_timestamp": "2022-02-09T13:22:57.101Z",
+        "start_timestamp": "2022-02-14T08:52:22.045Z",
         "line": 33,
         "name": "Client wants to delete an order in inventory",
         "description": "",
@@ -115,7 +115,7 @@
         "steps": [
           {
             "result": {
-              "duration": 86001600,
+              "duration": 122754200,
               "status": "passed"
             },
             "line": 34,
@@ -153,7 +153,7 @@
         ]
       },
       {
-        "start_timestamp": "2022-02-09T13:22:57.199Z",
+        "start_timestamp": "2022-02-14T08:52:22.189Z",
         "line": 38,
         "name": "Client wants to get an order",
         "description": "",
@@ -163,7 +163,7 @@
         "steps": [
           {
             "result": {
-              "duration": 24999600,
+              "duration": 22996900,
               "status": "passed"
             },
             "line": 39,
@@ -181,7 +181,7 @@
           },
           {
             "result": {
-              "duration": 2000400,
+              "duration": 1042900,
               "status": "passed"
             },
             "line": 40,
@@ -202,15 +202,22 @@
         ]
       },
       {
-        "start_timestamp": "2022-02-09T13:22:57.247Z",
+        "start_timestamp": "2022-02-14T08:52:22.234Z",
         "line": 43,
         "name": "Client wants to add a new product in inventory",
         "description": "",
         "id": "order-search;client-wants-to-add-a-new-product-in-inventory",
         "after": [
           {
+            "embeddings": [
+              {
+                "data": "dGVzdCBkYXRh",
+                "mime_type": "application/json",
+                "name": "Test.json"
+              }
+            ],
             "result": {
-              "duration": 11088600,
+              "duration": 20361000,
               "status": "passed"
             },
             "match": {
@@ -223,7 +230,7 @@
         "steps": [
           {
             "result": {
-              "duration": 59000700,
+              "duration": 63950200,
               "status": "passed"
             },
             "line": 44,
@@ -253,6 +260,7 @@
           },
           {
             "result": {
+              "duration": 1006600,
               "status": "passed"
             },
             "line": 45,
@@ -284,7 +292,7 @@
     "line": 19,
     "elements": [
       {
-        "start_timestamp": "2022-02-09T13:22:57.331Z",
+        "start_timestamp": "2022-02-14T08:52:22.337Z",
         "line": 28,
         "name": "Client wants to get a productName from product inventory",
         "description": "",
@@ -294,7 +302,7 @@
         "steps": [
           {
             "result": {
-              "duration": 14995200,
+              "duration": 21002500,
               "status": "passed"
             },
             "line": 23,
@@ -312,6 +320,7 @@
           },
           {
             "result": {
+              "duration": 1153800,
               "status": "passed"
             },
             "line": 24,
@@ -329,7 +338,7 @@
         ]
       },
       {
-        "start_timestamp": "2022-02-09T13:22:57.362Z",
+        "start_timestamp": "2022-02-14T08:52:22.376Z",
         "line": 29,
         "name": "Client wants to get a productName from product inventory",
         "description": "",
@@ -339,7 +348,7 @@
         "steps": [
           {
             "result": {
-              "duration": 15000100,
+              "duration": 16001300,
               "status": "passed"
             },
             "line": 23,
@@ -357,7 +366,6 @@
           },
           {
             "result": {
-              "duration": 1000100,
               "status": "passed"
             },
             "line": 24,
