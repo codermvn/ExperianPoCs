@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +24,9 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+@CrossOrigin(origins = &quot;http://172.17.0.6:3000&quot;)
 @RestController
-<span class="fc" id="L27">public class AddProductController implements AddProductApi{</span>
+<span class="nc" id="L29">public class AddProductController implements AddProductApi{</span>
 
 	@Autowired
 	ProductService productService;
@@ -38,8 +40,8 @@ import io.swagger.annotations.ApiResponses;
 			&quot;application/json&quot;, &quot;application/xml&quot; }, method = RequestMethod.POST)
 	public ResponseEntity&lt;Product&gt; addProductPost(
 			@ApiParam(value = &quot;product to add&quot;) @Valid @RequestBody InputProduct inputProduct) {
-<span class="fc" id="L41">		Product addedProduct = productService.createProduct(inputProduct);</span>
-<span class="fc" id="L42">		return new ResponseEntity&lt;&gt;(addedProduct, HttpStatus.OK);</span>
+<span class="nc" id="L43">		Product addedProduct = productService.createProduct(inputProduct);</span>
+<span class="nc" id="L44">		return new ResponseEntity&lt;&gt;(addedProduct, HttpStatus.OK);</span>
 	}
 
 @ApiOperation(value = &quot;add product&quot;, nickname = &quot;addProductPost&quot;, notes = &quot;add product &quot;, response = Product.class, tags = {
@@ -51,8 +53,8 @@ import io.swagger.annotations.ApiResponses;
 		&quot;application/json&quot;, &quot;application/xml&quot; }, method = RequestMethod.POST)
 public ResponseEntity&lt;Product&gt; deductInventoryPost(
 		@ApiParam(value = &quot;inventory to delete&quot;) @Valid @RequestBody InputDeductInventory productId, @ApiParam(value = &quot;&quot;, required = true) @PathVariable(&quot;quantity&quot;) Integer quantity) {
-<span class="fc" id="L54">	Product updatedProduct = productService.deductInventory(productId.getProductId(), quantity);</span>
-<span class="fc" id="L55">	return new ResponseEntity&lt;&gt;(updatedProduct, HttpStatus.OK);</span>
+<span class="nc" id="L56">	Product updatedProduct = productService.deductInventory(productId.getProductId(), quantity);</span>
+<span class="nc" id="L57">	return new ResponseEntity&lt;&gt;(updatedProduct, HttpStatus.OK);</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

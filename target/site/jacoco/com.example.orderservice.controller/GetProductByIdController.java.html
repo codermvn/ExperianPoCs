@@ -18,7 +18,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-<span class="fc" id="L21">public class GetProductByIdController {</span>
+<span class="nc" id="L21">public class GetProductByIdController {</span>
 
 	@Autowired
 	ProductService productService;
@@ -32,8 +32,8 @@ import io.swagger.annotations.ApiResponses;
 			&quot;application/xml&quot; }, method = RequestMethod.GET)
 	public ResponseEntity&lt;Product&gt; getProductProductIdGet(
 			@ApiParam(value = &quot;&quot;, required = true) @PathVariable(&quot;productId&quot;) Integer productId) {
-<span class="fc" id="L35">		Product product = productService.getProductById(productId);</span>
-<span class="fc" id="L36">		return new ResponseEntity&lt;&gt;(product, HttpStatus.OK);</span>
+<span class="nc" id="L35">		Product product = productService.getProductById(productId);</span>
+<span class="nc" id="L36">		return new ResponseEntity&lt;&gt;(product, HttpStatus.OK);</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
