@@ -7,7 +7,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.example.orderservice.model.Order;
+import com.example.model.Order;
 import com.example.orderservice.repository.OrderRepository;
 
 

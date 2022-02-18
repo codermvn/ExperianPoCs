@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
-import com.example.orderservice.model.Order;
-import com.example.orderservice.model.Order.OrdStatusEnum;
+import com.example.model.Order;
+import com.example.model.Order.OrdStatusEnum;
 import com.example.orderservice.service.OrderService;
 
 @Component

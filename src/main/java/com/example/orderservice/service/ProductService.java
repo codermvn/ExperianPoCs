@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.model.InputProduct;
+import com.example.model.Product;
 import com.example.orderservice.exception.CustomSQLException;
 import com.example.orderservice.exception.CustomerNotFoundException;
 import com.example.orderservice.exception.DataAlreadyExistsException;
-import com.example.orderservice.model.InputProduct;
-import com.example.orderservice.model.Product;
 import com.example.orderservice.repository.ProductRepository;
 import com.example.orderservice.util.ProductValidator;
 
@@ -24,6 +24,10 @@ public class ProductService {
 		Product product = null;
 		try {
 			product = productRepository.findByProductId(id);
+			
+			if (null == product) {
+				throw new CustomerNotFoundException("product not found");
+			}
 		} catch (Exception e) {
 			throw new CustomerNotFoundException("product not found");
 		}

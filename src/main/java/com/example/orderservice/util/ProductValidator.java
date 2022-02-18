@@ -2,8 +2,8 @@ package com.example.orderservice.util;
 
 import java.util.Optional;
 
+import com.example.model.InputProduct;
 import com.example.orderservice.exception.CustomerServiceException;
-import com.example.orderservice.model.InputProduct;
 
 
 public class ProductValidator {

@@ -9,8 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.ResponseEntity;
 
+import com.example.model.Product;
 import com.example.orderservice.exception.CustomerNotFoundException;
-import com.example.orderservice.model.Product;
 import com.example.orderservice.service.ProductService;
 
 @SpringBootTest(classes = GetProductByIdController.class)

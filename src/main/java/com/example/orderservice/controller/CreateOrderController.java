@@ -11,10 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.orderservice.controllerapi.CreateOrderApi;
-import com.example.orderservice.model.ExceptionResponse;
-import com.example.orderservice.model.InputOrder;
-import com.example.orderservice.model.Order;
+import com.example.model.ExceptionResponse;
+import com.example.model.InputOrder;
+import com.example.model.Order;
 import com.example.orderservice.service.OrderService;
 
 import io.swagger.annotations.ApiOperation;

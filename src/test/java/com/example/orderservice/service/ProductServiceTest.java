@@ -14,8 +14,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.example.orderservice.model.InputProduct;
-import com.example.orderservice.model.Product;
+import com.example.model.InputProduct;
+import com.example.model.Product;
 import com.example.orderservice.repository.ProductRepository;
 @ExtendWith(MockitoExtension.class)
 public class ProductServiceTest {

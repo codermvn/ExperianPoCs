@@ -12,9 +12,9 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import com.example.orderservice.model.Customer;
-import com.example.orderservice.model.InputOrder;
-import com.example.orderservice.model.Order;
+import com.example.model.Customer;
+import com.example.model.InputOrder;
+import com.example.model.Order;
 import com.example.orderservice.service.OrderService;
 
 @WebMvcTest(value = CreateOrderController.class)

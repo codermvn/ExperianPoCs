@@ -13,20 +13,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
+import com.example.model.Customer;
+import com.example.model.CustomerAmount;
+import com.example.model.InputOrder;
+import com.example.model.Order;
+import com.example.model.Order.OrdStatusEnum;
 import com.example.orderservice.exception.CustomException;
 import com.example.orderservice.exception.CustomerNotFoundException;
 import com.example.orderservice.exception.InsufficientBalanceException;
-import com.example.orderservice.model.Customer;
-import com.example.orderservice.model.CustomerAmount;
-import com.example.orderservice.model.InputOrder;
-import com.example.orderservice.model.Order;
-import com.example.orderservice.model.Order.OrdStatusEnum;
 import com.example.orderservice.repository.OrderRepository;
 import com.example.orderservice.transformer.CreateOrderTransformer;
 import com.example.orderservice.util.OrderValidator;
 
 @Service
-<span class="nc" id="L29">public class OrderService {</span>
+<span class="fc" id="L29">public class OrderService {</span>
 
 	@Autowired
 	OrderRepository orderRepository;
@@ -60,25 +60,25 @@ import com.example.orderservice.util.OrderValidator;
 	}
 
 	public Order getOrderById(int id) {
-<span class="nc" id="L63">		Order order = null;</span>
+<span class="fc" id="L63">		Order order = null;</span>
 		try {
-<span class="nc" id="L65">			order = orderRepository.findById(id).get();</span>
+<span class="fc" id="L65">			order = orderRepository.findById(id).get();</span>
 <span class="nc" id="L66">		} catch (Exception e) {</span>
 <span class="nc" id="L67">			throw new CustomerNotFoundException(&quot;order not found&quot;);</span>
-<span class="nc" id="L68">		}</span>
-<span class="nc" id="L69">		return order;</span>
+<span class="fc" id="L68">		}</span>
+<span class="fc" id="L69">		return order;</span>
 	}
 
 	public Order deleteOrderById(int id) {
-<span class="nc" id="L73">		Order deletedOrder = null;</span>
+<span class="fc" id="L73">		Order deletedOrder = null;</span>
 		try {
-<span class="nc" id="L75">			Order order = orderRepository.findById(id).get();</span>
-<span class="nc" id="L76">			order.setOrdStatus(OrdStatusEnum.FAILED);</span>
-<span class="nc" id="L77">			deletedOrder = orderRepository.save(order);</span>
+<span class="fc" id="L75">			Order order = orderRepository.findById(id).get();</span>
+<span class="fc" id="L76">			order.setOrdStatus(OrdStatusEnum.FAILED);</span>
+<span class="fc" id="L77">			deletedOrder = orderRepository.save(order);</span>
 <span class="nc" id="L78">		} catch (Exception e) {</span>
 <span class="nc" id="L79">			throw new CustomerNotFoundException(&quot;order not found&quot;);</span>
-<span class="nc" id="L80">		}</span>
-<span class="nc" id="L81">		return deletedOrder;</span>
+<span class="fc" id="L80">		}</span>
+<span class="fc" id="L81">		return deletedOrder;</span>
 	}
 	
 	//@Transactional(rollbackFor = { InsufficientBalanceException.class })

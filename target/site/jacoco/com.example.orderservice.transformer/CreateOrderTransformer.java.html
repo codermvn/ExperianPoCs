@@ -5,17 +5,16 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.orderservice.model.Customer;
-import com.example.orderservice.model.InputOrder;
-import com.example.orderservice.model.InputOrderProduct;
-import com.example.orderservice.model.Order;
-import com.example.orderservice.model.Order.OrdStatusEnum;
-import com.example.orderservice.model.OrderProduct;
-import com.example.orderservice.model.Product;
+import com.example.model.Customer;
+import com.example.model.InputOrder;
+import com.example.model.InputOrderProduct;
+import com.example.model.Order;
+import com.example.model.Order.OrdStatusEnum;
+import com.example.model.OrderProduct;
+import com.example.model.Product;
 import com.example.orderservice.service.ProductService;
 
 public class CreateOrderTransformer {
@@ -24,26 +23,26 @@ public class CreateOrderTransformer {
 	
 	ProductService productService;
 	
-<span class="nc" id="L27">	private CreateOrderTransformer(RestTemplate restTemplate,ProductService productService) {</span>
-<span class="nc" id="L28">		this.restTemplate = restTemplate;</span>
-<span class="nc" id="L29">		this.productService=productService;</span>
-<span class="nc" id="L30">	}</span>
+<span class="nc" id="L26">	private CreateOrderTransformer(RestTemplate restTemplate,ProductService productService) {</span>
+<span class="nc" id="L27">		this.restTemplate = restTemplate;</span>
+<span class="nc" id="L28">		this.productService=productService;</span>
+<span class="nc" id="L29">	}</span>
 	
 	public static CreateOrderTransformer getInstance(RestTemplate restTemplate,ProductService productService) {
-<span class="nc" id="L33">		return new CreateOrderTransformer(restTemplate,productService);</span>
+<span class="nc" id="L32">		return new CreateOrderTransformer(restTemplate,productService);</span>
 	}
 	
 	public Order populateOrder(InputOrder inputOrder, Customer customer) {
-<span class="nc" id="L37">		Order order = new Order();</span>
-<span class="nc" id="L38">		order.setCustomer(customer);</span>
-<span class="nc" id="L39">		BigDecimal totalValue = BigDecimal.ZERO;</span>
-<span class="nc bnc" id="L40" title="All 2 branches missed.">		if (!CollectionUtils.isEmpty(inputOrder.getOrderProducts())) {</span>
+<span class="nc" id="L36">		Order order = new Order();</span>
+<span class="nc" id="L37">		order.setCustomer(customer);</span>
+<span class="nc" id="L38">		BigDecimal totalValue = BigDecimal.ZERO;</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">		if (!CollectionUtils.isEmpty(inputOrder.getOrderProducts())) {</span>
 			
-<span class="nc bnc" id="L42" title="All 2 branches missed.">			for (InputOrderProduct eachOrderProduct: inputOrder.getOrderProducts()) {</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">			for (InputOrderProduct eachOrderProduct: inputOrder.getOrderProducts()) {</span>
 				
-<span class="nc" id="L44">				Integer productId = eachOrderProduct.getProductId();</span>
-<span class="nc" id="L45">				Integer quantity = eachOrderProduct.getQuantity();</span>
-<span class="nc" id="L46">     			Product product = productService.getProductById(productId);</span>
+<span class="nc" id="L43">				Integer productId = eachOrderProduct.getProductId();</span>
+<span class="nc" id="L44">				Integer quantity = eachOrderProduct.getQuantity();</span>
+<span class="nc" id="L45">     			Product product = productService.getProductById(productId);</span>
 				
 				//Product product = restTemplate.getForObject(&quot;http://localhost:8082/getProduct/{productId}&quot;, Product.class, productId);
 				
@@ -51,37 +50,37 @@ public class CreateOrderTransformer {
 				 * below will deduct inventory for the product
 				 */
 				//restTemplate.postForObject(&quot;http://localhost:8082/deductInventory/{quantity}&quot;, productId, Product.class, quantity);
-<span class="nc" id="L54">				addProductToOrder(order, product, eachOrderProduct);</span>
+<span class="nc" id="L53">				addProductToOrder(order, product, eachOrderProduct);</span>
 				
-<span class="nc" id="L56">				totalValue = totalValue.add(product.getProductPrice().multiply(new BigDecimal(quantity)));</span>
-<span class="nc" id="L57">			}</span>
+<span class="nc" id="L55">				totalValue = totalValue.add(product.getProductPrice().multiply(new BigDecimal(quantity)));</span>
+<span class="nc" id="L56">			}</span>
 		}
-<span class="nc" id="L59">		order.setOrderValue(totalValue);</span>
-<span class="nc" id="L60">		order.setDate(LocalDate.now());</span>
-<span class="nc" id="L61">		order.setTime(LocalTime.now());</span>
-<span class="nc" id="L62">		order.setOrdStatus(OrdStatusEnum.PENDING);</span>
-<span class="nc" id="L63">		return order;</span>
+<span class="nc" id="L58">		order.setOrderValue(totalValue);</span>
+<span class="nc" id="L59">		order.setDate(LocalDate.now());</span>
+<span class="nc" id="L60">		order.setTime(LocalTime.now());</span>
+<span class="nc" id="L61">		order.setOrdStatus(OrdStatusEnum.PENDING);</span>
+<span class="nc" id="L62">		return order;</span>
 	}
 
 	public void deductInventoryFromProduct(InputOrder inputOrder) {
-<span class="nc bnc" id="L67" title="All 2 branches missed.">		for (InputOrderProduct eachOrderProduct: inputOrder.getOrderProducts()) {</span>
-<span class="nc" id="L68">			Integer productId = eachOrderProduct.getProductId();</span>
-<span class="nc" id="L69">			Integer quantity = eachOrderProduct.getQuantity();</span>
-<span class="nc" id="L70">			productService.deductInventory(productId, quantity);</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">		for (InputOrderProduct eachOrderProduct: inputOrder.getOrderProducts()) {</span>
+<span class="nc" id="L67">			Integer productId = eachOrderProduct.getProductId();</span>
+<span class="nc" id="L68">			Integer quantity = eachOrderProduct.getQuantity();</span>
+<span class="nc" id="L69">			productService.deductInventory(productId, quantity);</span>
 			//restTemplate.postForObject(&quot;http://localhost:8082/deductInventory/{quantity}&quot;, productId, Product.class, quantity);
-<span class="nc" id="L72">		}</span>
-<span class="nc" id="L73">	}</span>
+<span class="nc" id="L71">		}</span>
+<span class="nc" id="L72">	}</span>
 	
 	private void addProductToOrder(Order order, Product product, InputOrderProduct eachOrderProduct) {
-<span class="nc" id="L76">			OrderProduct orderProduct = new OrderProduct();</span>
-<span class="nc" id="L77">			orderProduct.setProduct(product);</span>
-<span class="nc" id="L78">			orderProduct.setQuantity(eachOrderProduct.getQuantity());</span>
-<span class="nc" id="L79">			orderProduct.setOrder(order);</span>
-<span class="nc" id="L80">			orderProduct.setDate(LocalDate.now());</span>
-<span class="nc" id="L81">			orderProduct.setTime(LocalTime.now());</span>
-<span class="nc" id="L82">			System.out.println(LocalDateTime.now());</span>
-<span class="nc" id="L83">			order.addOrderProductsItem(orderProduct);</span>
-<span class="nc" id="L84">	} </span>
+<span class="nc" id="L75">			OrderProduct orderProduct = new OrderProduct();</span>
+<span class="nc" id="L76">			orderProduct.setProduct(product);</span>
+<span class="nc" id="L77">			orderProduct.setQuantity(eachOrderProduct.getQuantity());</span>
+<span class="nc" id="L78">			orderProduct.setOrder(order);</span>
+<span class="nc" id="L79">			orderProduct.setDate(LocalDate.now());</span>
+<span class="nc" id="L80">			orderProduct.setTime(LocalTime.now());</span>
+<span class="nc" id="L81">			System.out.println(LocalDateTime.now());</span>
+<span class="nc" id="L82">			order.addOrderProductsItem(orderProduct);</span>
+<span class="nc" id="L83">	} </span>
 }
 
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

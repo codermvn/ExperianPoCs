@@ -5,17 +5,16 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.orderservice.model.Customer;
-import com.example.orderservice.model.InputOrder;
-import com.example.orderservice.model.InputOrderProduct;
-import com.example.orderservice.model.Order;
-import com.example.orderservice.model.Order.OrdStatusEnum;
-import com.example.orderservice.model.OrderProduct;
-import com.example.orderservice.model.Product;
+import com.example.model.Customer;
+import com.example.model.InputOrder;
+import com.example.model.InputOrderProduct;
+import com.example.model.Order;
+import com.example.model.Order.OrdStatusEnum;
+import com.example.model.OrderProduct;
+import com.example.model.Product;
 import com.example.orderservice.service.ProductService;
 
 public class CreateOrderTransformer {

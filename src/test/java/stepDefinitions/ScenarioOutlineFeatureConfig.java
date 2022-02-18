@@ -6,12 +6,12 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.orderservice.model.Product;
+import com.example.model.Product;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
-public class ScenarioOutlineFeatureConfig extends ScenarioConfig{
+public class ScenarioOutlineFeatureConfig extends ScenarioConfig {
 
 	protected RestTemplate restTemplate = new RestTemplate();
 	

@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.orderservice.model.ExceptionResponse;
-import com.example.orderservice.model.Product;
+import com.example.model.ExceptionResponse;
+import com.example.model.Product;
 import com.example.orderservice.service.ProductService;
 
 import io.swagger.annotations.ApiOperation;

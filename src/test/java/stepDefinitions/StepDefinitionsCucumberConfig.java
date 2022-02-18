@@ -12,10 +12,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.orderservice.model.InputDeductInventory;
-import com.example.orderservice.model.InputProduct;
-import com.example.orderservice.model.Order;
-import com.example.orderservice.model.Product;
+import com.example.model.InputDeductInventory;
+import com.example.model.InputProduct;
+import com.example.model.Order;
+import com.example.model.Product;
 import com.example.orderservice.repository.ProductRepository;
 
 import io.cucumber.java.After;

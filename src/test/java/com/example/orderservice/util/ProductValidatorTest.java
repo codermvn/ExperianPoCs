@@ -8,8 +8,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.example.model.InputProduct;
 import com.example.orderservice.exception.CustomerServiceException;
-import com.example.orderservice.model.InputProduct;
 
 @SpringBootTest
 public class ProductValidatorTest {

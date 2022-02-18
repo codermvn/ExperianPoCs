@@ -11,10 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.orderservice.controllerapi.CreateOrderApi;
-import com.example.orderservice.model.ExceptionResponse;
-import com.example.orderservice.model.InputOrder;
-import com.example.orderservice.model.Order;
+import com.example.model.ExceptionResponse;
+import com.example.model.InputOrder;
+import com.example.model.Order;
 import com.example.orderservice.service.OrderService;
 
 import io.swagger.annotations.ApiOperation;
@@ -24,7 +23,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 //public class CreateOrderController implements CreateOrderApi {
-<span class="nc" id="L27">public class CreateOrderController {</span>
+<span class="fc" id="L26">public class CreateOrderController {</span>
 	@Autowired
 	OrderService orderService;
 	
@@ -37,8 +36,8 @@ import io.swagger.annotations.ApiResponses;
 	public ResponseEntity&lt;Order&gt; createOrderPost(
 			@ApiParam(value = &quot;Order to add&quot;) @Valid @RequestBody InputOrder inputOrder, @RequestHeader(&quot;Authorization&quot;) String token
 ) {
-<span class="nc" id="L40">		Order addedOrder = orderService.createOrderWithException(inputOrder,token);</span>
-<span class="nc" id="L41">		return new ResponseEntity&lt;&gt;(addedOrder, HttpStatus.OK);</span>
+<span class="nc" id="L39">		Order addedOrder = orderService.createOrderWithException(inputOrder,token);</span>
+<span class="nc" id="L40">		return new ResponseEntity&lt;&gt;(addedOrder, HttpStatus.OK);</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

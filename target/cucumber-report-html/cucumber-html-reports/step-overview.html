@@ -76,7 +76,7 @@ $(document).ready(function() {
           <tr class="info">
             <td>OrderService</td>
                           <td>1</td>
-                        <td>17 Feb 2022, 19:06</td>
+                        <td>18 Feb 2022, 19:24</td>
           </tr>
         </tbody>
       </table>
@@ -98,7 +98,123 @@ $(document).ready(function() {
 <div class="container-fluid" id="summary">
   <div class="row">
     <div class="col-md-10 col-md-offset-1">
-              <p>You have no features in your cucumber report</p>
+              <table id="tablesorter" class="stats-table table-hover">
+
+          <thead>
+            <tr class="header">
+              <th>Implementation</th>
+              <th>Occurrences</th>
+              <th>Duration</th>
+              <th>Average</th>
+              <th>Ratio</th>
+            </tr>
+          </thead>
+
+          <tbody>
+                          <tr>
+                <td class="location">stepDefinitions.ScenarioOutlineFeatureConfig.client_calls_get_product_with_product_id_as(java.lang.Integer)</td>
+                <td>2</td>
+                <td class="duration" data-value="33996900">033ms</td>
+                <td class="duration" data-value="16998450">016ms</td>
+                <td class="passed">100.00%</td>
+              </tr>
+                          <tr>
+                <td class="location">stepDefinitions.ScenarioOutlineFeatureConfig.the_client_receives_the_product()</td>
+                <td>2</td>
+                <td class="duration" data-value="0">000ms</td>
+                <td class="duration" data-value="0">000ms</td>
+                <td class="passed">100.00%</td>
+              </tr>
+                          <tr>
+                <td class="location">stepDefinitions.StepDefinitionsCucumberConfig.after(io.cucumber.java.Scenario)</td>
+                <td>1</td>
+                <td class="duration" data-value="18002700">018ms</td>
+                <td class="duration" data-value="18002700">018ms</td>
+                <td class="passed">100.00%</td>
+              </tr>
+                          <tr>
+                <td class="location">stepDefinitions.StepDefinitionsCucumberConfig.client_calls_addProduct_with_productName_productPrice_company_inventory_as(java.lang.String,java.math.BigDecimal,java.lang.String,java.lang.Integer)</td>
+                <td>1</td>
+                <td class="duration" data-value="58001400">058ms</td>
+                <td class="duration" data-value="58001400">058ms</td>
+                <td class="passed">100.00%</td>
+              </tr>
+                          <tr>
+                <td class="location">stepDefinitions.StepDefinitionsCucumberConfig.client_calls_deductInventory_with_productId_as(java.lang.Integer,java.lang.Integer)</td>
+                <td>1</td>
+                <td class="duration" data-value="549829200">549ms</td>
+                <td class="duration" data-value="549829200">549ms</td>
+                <td class="passed">100.00%</td>
+              </tr>
+                          <tr>
+                <td class="location">stepDefinitions.StepDefinitionsCucumberConfig.client_calls_deleteOrder(java.lang.Integer)</td>
+                <td>1</td>
+                <td class="duration" data-value="106997700">106ms</td>
+                <td class="duration" data-value="106997700">106ms</td>
+                <td class="passed">100.00%</td>
+              </tr>
+                          <tr>
+                <td class="location">stepDefinitions.StepDefinitionsCucumberConfig.client_calls_getOrder(java.lang.Integer)</td>
+                <td>1</td>
+                <td class="duration" data-value="27000900">027ms</td>
+                <td class="duration" data-value="27000900">027ms</td>
+                <td class="passed">100.00%</td>
+              </tr>
+                          <tr>
+                <td class="location">stepDefinitions.StepDefinitionsCucumberConfig.client_calls_getProduct(java.lang.Integer)</td>
+                <td>1</td>
+                <td class="duration" data-value="17001100">017ms</td>
+                <td class="duration" data-value="17001100">017ms</td>
+                <td class="passed">100.00%</td>
+              </tr>
+                          <tr>
+                <td class="location">stepDefinitions.StepDefinitionsCucumberConfig.new_product_is_added_into_inventory()</td>
+                <td>1</td>
+                <td class="duration" data-value="989400">000ms</td>
+                <td class="duration" data-value="989400">000ms</td>
+                <td class="passed">100.00%</td>
+              </tr>
+                          <tr>
+                <td class="location">stepDefinitions.StepDefinitionsCucumberConfig.the_client_receives_an_Order()</td>
+                <td>1</td>
+                <td class="duration" data-value="1001200">001ms</td>
+                <td class="duration" data-value="1001200">001ms</td>
+                <td class="passed">100.00%</td>
+              </tr>
+                          <tr>
+                <td class="location">stepDefinitions.StepDefinitionsCucumberConfig.the_client_receives_an_order_with_order_status_failed()</td>
+                <td>1</td>
+                <td class="duration" data-value="1000700">001ms</td>
+                <td class="duration" data-value="1000700">001ms</td>
+                <td class="passed">100.00%</td>
+              </tr>
+                          <tr>
+                <td class="location">stepDefinitions.StepDefinitionsCucumberConfig.the_client_receives_answer_as(java.lang.Integer)</td>
+                <td>1</td>
+                <td class="duration" data-value="408200">000ms</td>
+                <td class="duration" data-value="408200">000ms</td>
+                <td class="passed">100.00%</td>
+              </tr>
+                          <tr>
+                <td class="location">stepDefinitions.StepDefinitionsCucumberConfig.the_client_receives_answer_as_T_shirt()</td>
+                <td>1</td>
+                <td class="duration" data-value="3000300">003ms</td>
+                <td class="duration" data-value="3000300">003ms</td>
+                <td class="passed">100.00%</td>
+              </tr>
+                      </tbody>
+
+          <tfoot class="total">
+            <tr>
+              <td>13</td>
+              <td>15</td>
+              <td class="duration">817ms</td>
+              <td class="duration">054ms</td>
+              <td>Totals</td>
+            </tr>
+          </tfoot>
+
+        </table>
           </div>
   </div>
 </div>
