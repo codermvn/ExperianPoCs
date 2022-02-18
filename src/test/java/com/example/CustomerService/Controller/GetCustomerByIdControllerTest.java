@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.example.CustomerService.Exception.CustomerNotFoundException;
 import com.example.CustomerService.Service.CustomerService;
-import com.example.CustomerService.model.Customer;
+import com.example.model.Customer;
 
 @SpringBootTest(classes = GetCustomerByIdController.class)
 public class GetCustomerByIdControllerTest {

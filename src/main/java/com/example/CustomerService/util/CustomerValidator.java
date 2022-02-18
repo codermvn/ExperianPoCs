@@ -5,8 +5,8 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import com.example.CustomerService.Exception.CustomerServiceException;
-import com.example.CustomerService.model.CustomerAmount;
-import com.example.CustomerService.model.InputCustomer;
+import com.example.model.CustomerAmount;
+import com.example.model.InputCustomer;
 
 public class CustomerValidator {
 	public static final String BAD_REQUEST_MESSAGE = "bad Request: Required field value is invalid";

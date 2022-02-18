@@ -9,8 +9,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.CustomerService.Exception.CustomerServiceException;
-import com.example.CustomerService.model.CustomerAmount;
-import com.example.CustomerService.model.InputCustomer;
+import com.example.model.CustomerAmount;
+import com.example.model.InputCustomer;
 
 @SpringBootTest
 public class CustomerValidatorUtilTest {

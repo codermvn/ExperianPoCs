@@ -17,8 +17,8 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.example.CustomerService.Service.CustomerService;
-import com.example.CustomerService.model.Customer;
-import com.example.CustomerService.model.InputCustomer;
+import com.example.model.Customer;
+import com.example.model.InputCustomer;
 
 @WebMvcTest(value = AddCustomerController.class)
 public class AddCustomerControllerTest {

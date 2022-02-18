@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CustomerValidator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CustomerService</a> &gt; <a href="index.source.html" class="el_package">com.example.CustomerService.util</a> &gt; <span class="el_source">CustomerValidator.java</span></div><h1>CustomerValidator.java</h1><pre class="source lang-java linenums">package com.example.CustomerService.util;
+
+import java.util.Optional;
+
+import javax.validation.Valid;
+
+import com.example.CustomerService.Exception.CustomerServiceException;
+import com.example.model.CustomerAmount;
+import com.example.model.InputCustomer;
+
+<span class="nc" id="L11">public class CustomerValidator {</span>
+	public static final String BAD_REQUEST_MESSAGE = &quot;bad Request: Required field value is invalid&quot;;
+	
+	public static void validateCustomer(InputCustomer inputCustomer) {
+<span class="fc bfc" id="L15" title="All 4 branches covered.">		if (!Optional.ofNullable(inputCustomer.getCustomerName()).isPresent() || !Optional.ofNullable(inputCustomer.getCustomerAddress()).isPresent()</span>
+<span class="pc bpc" id="L16" title="2 of 4 branches missed.">				|| !Optional.ofNullable(inputCustomer.getDebitAvailable()).isPresent() || !Optional.ofNullable(inputCustomer.getModeOfPayment()).isPresent()</span>
+<span class="pc bpc" id="L17" title="2 of 4 branches missed.">				|| inputCustomer.getDebitAvailable().signum() == 0 || inputCustomer.getDebitAvailable().signum() == -1) {</span>
+<span class="fc" id="L18">			throw new CustomerServiceException(BAD_REQUEST_MESSAGE);</span>
+		}
+<span class="fc" id="L20">	}</span>
+	
+	/**
+	 * signum returns -1 for negative and 1 for positive and 0 for 0
+	 * @param customerAmount
+	 */
+	public static void validateAmount(@Valid CustomerAmount customerAmount) {
+<span class="pc bpc" id="L27" title="3 of 6 branches missed.">		if (!Optional.ofNullable(customerAmount.getValue()).isPresent() || customerAmount.getValue().signum() == -1 || !Optional.ofNullable(customerAmount.getCustomerId()).isPresent() </span>
+<span class="pc bpc" id="L28" title="1 of 4 branches missed.">				|| customerAmount.getValue().signum() == 0 || customerAmount.getValue().signum() == -1 ) {</span>
+<span class="fc" id="L29">			throw new CustomerServiceException(BAD_REQUEST_MESSAGE);</span>
+		}
+<span class="fc" id="L31">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

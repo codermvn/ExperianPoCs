@@ -20,9 +20,9 @@
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>com.example.demo</groupId>
-			<artifactId>account-api</artifactId>
-			<version>0.0.0.1</version>
+			<groupId>com.example.model</groupId>
+			<artifactId>experian-poc-models</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

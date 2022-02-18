@@ -12,8 +12,8 @@ import org.springframework.http.ResponseEntity;
 
 import com.example.CustomerService.Exception.CustomerNotFoundException;
 import com.example.CustomerService.Service.CustomerService;
-import com.example.CustomerService.model.Customer;
-import com.example.CustomerService.model.CustomerAmount;
+import com.example.model.Customer;
+import com.example.model.CustomerAmount;
 
 @SpringBootTest(classes = CreditByCustomerIdController.class)
 public class CreditByCustomerIdControllerTest {

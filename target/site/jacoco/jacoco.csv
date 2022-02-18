@@ -1,0 +1,10 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+CustomerService,com.example.CustomerService.Config,ProjectSecurityConfig,0,45,0,0,0,9,0,2,0,2
+CustomerService,com.example.CustomerService.Config,Config,0,7,0,0,0,2,0,2,0,2
+CustomerService,com.example.CustomerService.Config,KeycloakRoleConverter,39,3,4,0,8,1,4,1,2,1
+CustomerService,com.example.CustomerService.util,CustomerValidator,3,65,8,14,1,9,9,5,1,2
+CustomerService,com.example.CustomerService.Service,CustomerService,0,150,0,4,0,39,0,8,0,6
+CustomerService,com.example.CustomerService.Controller,AddCustomerController,0,14,0,0,0,3,0,2,0,2
+CustomerService,com.example.CustomerService.Controller,GetCustomerByIdController,0,15,0,0,0,3,0,2,0,2
+CustomerService,com.example.CustomerService.Controller,DebitByCustomerIdController,0,14,0,0,0,3,0,2,0,2
+CustomerService,com.example.CustomerService.Controller,CreditByCustomerIdController,0,14,0,0,0,3,0,2,0,2

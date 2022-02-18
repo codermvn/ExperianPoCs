@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProjectSecurityConfig.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CustomerService</a> &gt; <a href="index.source.html" class="el_package">com.example.CustomerService.Config</a> &gt; <span class="el_source">ProjectSecurityConfig.java</span></div><h1>ProjectSecurityConfig.java</h1><pre class="source lang-java linenums">package com.example.CustomerService.Config;
+
+import java.util.Collections;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+
+@Configuration
+<span class="fc" id="L15">public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {</span>
+
+	/**
+	 * /myAccount - Secured /myBalance - Secured /myLoans - Secured /myCards -
+	 * Secured /notices - Not Secured /contact - Not Secured
+	 */
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+
+<span class="fc" id="L24">		JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();</span>
+<span class="fc" id="L25">		jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(new KeycloakRoleConverter());</span>
+		
+		//parameterized list
+<span class="fc" id="L28">		http.authorizeRequests()</span>
+		//.antMatchers(&quot;/createCustomer&quot;).authenticated()
+<span class="fc" id="L30">		.antMatchers(&quot;/getCustomer/{customerId}&quot;).hasAnyRole(&quot;USER&quot;)</span>
+		//.antMatchers(&quot;/getCustomer&quot;).hasAnyRole(&quot;USER&quot;, &quot;ADMIN&quot;)
+<span class="fc" id="L32">		.and().csrf().disable()</span>
+<span class="fc" id="L33">		.oauth2ResourceServer().jwt().jwtAuthenticationConverter(jwtAuthenticationConverter);</span>
+		
+		/**
+		 * This configuration is needed to view the /h2-console with out any issues.
+		 * Since H2 Console uses frames to display the UI, we need to allow the frames.
+		 * Otherwise since by default Spring Security consider X-Frame-Options: DENY
+		 * to avoid Clickjacking attacks, the /h2-console will not work properly.
+		 * More details can be found at 
+		 * https://docs.spring.io/spring-security/site/docs/5.0.x/reference/html/headers.html#headers-frame-options
+		 */
+<span class="fc" id="L43">		http.headers().frameOptions().sameOrigin();</span>
+
+<span class="fc" id="L45">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

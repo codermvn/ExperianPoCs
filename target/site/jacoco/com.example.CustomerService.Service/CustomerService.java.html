@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CustomerService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CustomerService</a> &gt; <a href="index.source.html" class="el_package">com.example.CustomerService.Service</a> &gt; <span class="el_source">CustomerService.java</span></div><h1>CustomerService.java</h1><pre class="source lang-java linenums">package com.example.CustomerService.Service;
+
+import java.math.BigDecimal;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.example.CustomerService.Exception.CustomSQLException;
+import com.example.CustomerService.Exception.CustomerNotFoundException;
+import com.example.CustomerService.Exception.DataAlreadyExistsException;
+import com.example.CustomerService.Exception.InsufficientBalanceException;
+import com.example.CustomerService.Repository.CustomerRepository;
+import com.example.model.Customer;
+import com.example.model.Customer.StatusEnum;
+import com.example.model.CustomerAmount;
+import com.example.model.InputCustomer;
+import com.example.CustomerService.util.CustomerValidator;
+
+@Service
+<span class="fc" id="L23">public class CustomerService {</span>
+
+	@Autowired
+	CustomerRepository customerRepository;
+	
+	public Customer getCustomerById(int id) {
+<span class="fc" id="L29">		Customer customer = null;</span>
+		try {
+<span class="fc" id="L31">			customer = customerRepository.findById(id).get();</span>
+<span class="fc" id="L32">		} catch (Exception e) {</span>
+<span class="fc" id="L33">			throw new CustomerNotFoundException(&quot;customer not found&quot;);</span>
+<span class="fc" id="L34">		}</span>
+<span class="fc" id="L35">		return customer;</span>
+	}
+
+	public Customer addCustomer(@Valid InputCustomer inputCustomer) {
+<span class="fc" id="L39">		Customer customer = new Customer();</span>
+<span class="fc" id="L40">		customer.setStatus(StatusEnum.ACTIVE);</span>
+<span class="fc" id="L41">		customer.setCustomerName(inputCustomer.getCustomerName());</span>
+<span class="fc" id="L42">		customer.setCustomerAddress(inputCustomer.getCustomerAddress());</span>
+<span class="fc" id="L43">		customer.setDebitAvailable(inputCustomer.getDebitAvailable());</span>
+<span class="fc" id="L44">		customer.setModeOfPayment(inputCustomer.getModeOfPayment());</span>
+<span class="fc" id="L45">		return customerRepository.save(customer);</span>
+	}
+	
+	@Transactional(rollbackFor = {CustomSQLException.class})
+	public Customer createCustomerWithRuntimeException(@Valid InputCustomer inputCustomer) {
+		/**
+		 *	below throws 400 for invalid input
+		 */
+<span class="fc" id="L53">		CustomerValidator.validateCustomer(inputCustomer);</span>
+				
+<span class="fc" id="L55">		Customer newCustomer = customerRepository.findByCustomerNameAndCustomerAddressAndDebitAvailable(inputCustomer.getCustomerName(), inputCustomer.getCustomerAddress(), inputCustomer.getDebitAvailable());</span>
+		
+<span class="fc" id="L57">		Customer addedCustomer = null;</span>
+		
+<span class="fc bfc" id="L59" title="All 2 branches covered.">		if (newCustomer == null) {</span>
+<span class="fc" id="L60">			addedCustomer = addCustomer(inputCustomer);</span>
+<span class="fc" id="L61">			System.out.println(&quot;Customer successfully created&quot;);</span>
+			
+         /* if(addedCustomer.getCustomerName().length() &gt;=10) {
+        	  System.out.println(&quot;name exceeds 10 characters&quot;);
+        	  throw new CustomSQLException(&quot;Throwing exception for Rollback&quot;);
+          }  */
+			
+		} else {
+<span class="fc" id="L69">				System.out.println(&quot;This customer already exists!&quot;);</span>
+<span class="fc" id="L70">				throw new DataAlreadyExistsException(&quot;customer already Exists&quot;);</span>
+			}
+<span class="fc" id="L72">		return addedCustomer; </span>
+		}
+	
+	//@Transactional(rollbackFor = {CustomSQLException.class})
+	public Customer creditAmountCustomer(CustomerAmount customerAmount) {
+
+        /**
+		 * below method will handle 400
+		 */
+<span class="fc" id="L81">		CustomerValidator.validateAmount(customerAmount);</span>
+		/**
+		 * below method will handle 404
+		 */
+<span class="fc" id="L85">		Customer customer = getCustomerById(customerAmount.getCustomerId());</span>
+<span class="fc" id="L86">		BigDecimal addedValue = customer.getDebitAvailable().add(customerAmount.getValue());</span>
+<span class="fc" id="L87">		customer.setDebitAvailable(addedValue);</span>
+<span class="fc" id="L88">		Customer addedCustomer = customerRepository.save(customer);</span>
+		
+	/*	BigDecimal b1 = new BigDecimal(40000);
+		
+		if ((customer.getDebitAvailable().compareTo(b1) == 0) || (customer.getDebitAvailable().compareTo(b1) &gt; 0)) {
+			System.out.println(&quot;Credit cannot be done!&quot;);
+			throw new CustomSQLException(&quot;Throwing exception for Rollback&quot;);
+		}*/
+<span class="fc" id="L96">		return addedCustomer;</span>
+	}
+
+	@Transactional(rollbackFor = {InsufficientBalanceException.class})
+	public Customer debitAmountCustomer(CustomerAmount customerAmount) throws InsufficientBalanceException{
+<span class="fc" id="L101">		Customer addedCustomer = null;</span>
+        /**
+		 * below method will handle 400
+		 */
+<span class="fc" id="L105">		CustomerValidator.validateAmount(customerAmount);</span>
+		/**
+		 * below method will handle 404
+		 */
+<span class="fc" id="L109">		Customer customer = getCustomerById(customerAmount.getCustomerId());</span>
+<span class="fc" id="L110">		BigDecimal subtractVal = customer.getDebitAvailable().subtract(customerAmount.getValue());</span>
+<span class="fc bfc" id="L111" title="All 2 branches covered.">	if (subtractVal.compareTo(BigDecimal.ZERO) &gt; 0) {</span>
+
+<span class="fc" id="L113">			customer.setDebitAvailable(subtractVal);</span>
+<span class="fc" id="L114">			addedCustomer = customerRepository.save(customer);</span>
+			/*BigDecimal b1 = new BigDecimal(1000);
+			
+			if ((customer.getDebitAvailable().compareTo(b1) == 0) || (customer.getDebitAvailable().compareTo(b1) &lt; 0)) {
+				System.out.println(&quot;Debit cannot be done!&quot;);
+				throw new CustomSQLException(&quot;Throwing exception for Rollback&quot;);
+			}
+          */
+		} else {
+<span class="fc" id="L123">			System.out.println(&quot;insufficient amount to perform debit&quot;);</span>
+<span class="fc" id="L124">			throw new InsufficientBalanceException(&quot;insufficient amount to perform debit&quot;);</span>
+		}
+<span class="fc" id="L126">		return addedCustomer;</span>
+		
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

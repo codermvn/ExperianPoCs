@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.CustomerService.Controllerapi.CreateCustomerApi;
 import com.example.CustomerService.Service.CustomerService;
-import com.example.CustomerService.model.Customer;
-import com.example.CustomerService.model.ExceptionResponse;
-import com.example.CustomerService.model.InputCustomer;
+import com.example.model.Customer;
+import com.example.model.ExceptionResponse;
+import com.example.model.InputCustomer;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

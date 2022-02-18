@@ -18,9 +18,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.example.CustomerService.Exception.CustomerNotFoundException;
 import com.example.CustomerService.Exception.InsufficientBalanceException;
 import com.example.CustomerService.Repository.CustomerRepository;
-import com.example.CustomerService.model.Customer;
-import com.example.CustomerService.model.CustomerAmount;
-import com.example.CustomerService.model.InputCustomer;
+import com.example.model.Customer;
+import com.example.model.CustomerAmount;
+import com.example.model.InputCustomer;
 
 @ExtendWith(MockitoExtension.class)
 public class CustomerServiceTest{

@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.CustomerService.Controllerapi.CreditApi;
 import com.example.CustomerService.Service.CustomerService;
-import com.example.CustomerService.model.Customer;
-import com.example.CustomerService.model.CustomerAmount;
-import com.example.CustomerService.model.ExceptionResponse;
+import com.example.model.Customer;
+import com.example.model.CustomerAmount;
+import com.example.model.ExceptionResponse;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

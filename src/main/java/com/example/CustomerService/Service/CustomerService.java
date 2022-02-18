@@ -13,10 +13,10 @@ import com.example.CustomerService.Exception.CustomerNotFoundException;
 import com.example.CustomerService.Exception.DataAlreadyExistsException;
 import com.example.CustomerService.Exception.InsufficientBalanceException;
 import com.example.CustomerService.Repository.CustomerRepository;
-import com.example.CustomerService.model.Customer;
-import com.example.CustomerService.model.Customer.StatusEnum;
-import com.example.CustomerService.model.CustomerAmount;
-import com.example.CustomerService.model.InputCustomer;
+import com.example.model.Customer;
+import com.example.model.Customer.StatusEnum;
+import com.example.model.CustomerAmount;
+import com.example.model.InputCustomer;
 import com.example.CustomerService.util.CustomerValidator;
 
 @Service
