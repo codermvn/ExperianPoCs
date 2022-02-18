@@ -21,15 +21,47 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"productName\": \"T-Shirt\",\r\n    \"productPrice\": 250,\r\n    \"company\": \"Turtle\",\r\n    \"inventory\":2000\r\n}"
+							"raw": "{\r\n    \"productName\": \"Laptop\",\r\n    \"productPrice\": 250,\r\n    \"company\": \"Turtle\",\r\n    \"inventory\":2000\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/addProduct",
+							"raw": "http://127.0.0.1:59393/addProduct",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "59393",
+							"path": [
+								"addProduct"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addProduct local",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productName\": \"Laptop\",\r\n    \"productPrice\": 250,\r\n    \"company\": \"Turtle\",\r\n    \"inventory\":2000\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8085/addProduct",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8082",
+							"port": "8085",
 							"path": [
 								"addProduct"
 							]
@@ -56,15 +88,51 @@
 							"raw": "{\r\n    \"customerName\": \"Mainak\",\r\n    \"modeOfPayment\": \"cash\",\r\n    \"customerAddress\": \"Kolkata\",\r\n    \"debitAvailable\":20000.00\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/getProduct/3",
+							"raw": "http://127.0.0.1:59393/getProduct/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "59393",
+							"path": [
+								"getProduct",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProductById local",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerName\": \"Mainak\",\r\n    \"modeOfPayment\": \"cash\",\r\n    \"customerAddress\": \"Kolkata\",\r\n    \"debitAvailable\":20000.00\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8085/getProduct/73",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8082",
+							"port": "8085",
 							"path": [
 								"getProduct",
-								"3"
+								"73"
 							]
 						}
 					},
@@ -118,7 +186,42 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"customerName\": \"Deepak\",\r\n    \"modeOfPayment\": \"cash\",\r\n    \"customerAddress\": \"Mumbai\",\r\n    \"debitAvailable\":1000\r\n}"
+							"raw": "{\r\n    \"customerName\": \"Manas\",\r\n    \"modeOfPayment\": \"cash\",\r\n    \"customerAddress\": \"Kochi\",\r\n    \"debitAvailable\":10000\r\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:58285/createCustomer",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "58285",
+							"path": [
+								"createCustomer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addCustomerValidInput 8082",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerName\": \"Suman\",\r\n    \"modeOfPayment\": \"cash\",\r\n    \"customerAddress\": \"Kolkata\",\r\n    \"debitAvailable\":3000\r\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8082/createCustomer",
@@ -150,10 +253,56 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"customerName\": \"Mainak\",\r\n    \"modeOfPayment\": \"cash\",\r\n    \"customerAddress\": \"Kolkata\",\r\n    \"debitAvailable\":20000.00\r\n}"
+							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8082/getCustomer/1",
+							"raw": "http://127.0.0.1:58285/getCustomer/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "58285",
+							"path": [
+								"getCustomer",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCustomerById 8082",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJSc0hraEVxeXdsdkFUZG1hSWZaRm0yN1pVa2tZaVczQnl2Q1dDNzg2UlFrIn0.eyJleHAiOjE2NDQ4Mzk5ODEsImlhdCI6MTY0NDgzOTY4MSwianRpIjoiNDYwMDA4MzEtNTBjNC00ZTIyLWFjNmMtNGIwZjk2NDY3OTM2IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL2N1c3RvbWVyc2VydmljZSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiIyNTY1NjQ1NS03ZDYzLTQ0YzctOTdhZC1mNzEwYzE5MGZkOTEiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJjdXN0b21lcmFwaSIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1jdXN0b21lcnNlcnZpY2UiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiVVNFUiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJjbGllbnRIb3N0IjoiMTI3LjAuMC4xIiwiY2xpZW50SWQiOiJjdXN0b21lcmFwaSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoic2VydmljZS1hY2NvdW50LWN1c3RvbWVyYXBpIiwiY2xpZW50QWRkcmVzcyI6IjEyNy4wLjAuMSJ9.Gx2nGgV7qSBPvQFIowy7I32Fm8-GQmQyrR8KWrpcLsc-Jej-CgHANwT4WcvqhRBAcTUioCRWDD3oo9ciSNWKlGeP2fHIJLkbZ6YFKbNMAXu2A7b-E0gX0enRNpL__kMv2PEIEPvWLpo-JdWsVtLI9KIPygJc15ZaPHIb2FR-PKd6iKUOquiEOLnR6x9MM4CjjAUcGhdyYGGyli9Pe2EBNZEccbzY2FLqr421GE691bsZ0bdw8p43KGnC1O15gjPB2QtCZ7bCtWQCh59R9txntm8e0y4sEGm2jCCZXwZMcG6x8gcxY9jGdq8P2SAZJny-tF4HOQC0Qdsfk-6abx_txw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8082/getCustomer/87",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -161,7 +310,7 @@
 							"port": "8082",
 							"path": [
 								"getCustomer",
-								"1"
+								"87"
 							]
 						}
 					},
@@ -175,6 +324,16 @@
 				{
 					"name": "addOrder",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJtV2JZYmVuazNjTVVsU3hKdFV3M2NmdHBmY3UzcW0zbzNDY1JqQ3kzUERzIn0.eyJleHAiOjE2NDMyNjY5MjIsImlhdCI6MTY0MzI2NjYyMiwianRpIjoiMTIwZTY4MWQtNjA3ZC00ZTQyLWEzMTQtYjBiZDVlZGIxYWEzIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL29yZGVyc2VydmljZSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI4Yjc4MmI5OS1mNWY1LTRkMzMtOWMxZi0yNzBiZTc4OGIzMmMiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJvcmRlcnNlcnZhcGkiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtb3JkZXJzZXJ2aWNlIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIGVtYWlsIHByb2ZpbGUiLCJjbGllbnRJZCI6Im9yZGVyc2VydmFwaSIsImNsaWVudEhvc3QiOiIxMjcuMC4wLjEiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6InNlcnZpY2UtYWNjb3VudC1vcmRlcnNlcnZhcGkiLCJjbGllbnRBZGRyZXNzIjoiMTI3LjAuMC4xIn0.UqkPtvnnY1VAToY1jXX4PDv65WDfDOKyLDqstkU2WawlMVoNRryHCTbbrPAzNDtV-7yQl-kfbXVl8mD5VlNqUlvI2YZ90VzineHb9RnZSfKi8dlxPBlvqxldpeAPr23aaCyP53PgPD6loCKN6Axhqql4VZXWZYrCejkSAEzVonLwehawLkBzKlOeh3DNy8c_4B5hJFejOoGeSCOX6ukMlpDJ9WeIyoyeijK9Snvw_zAL_yuFOp0B3pWi-Lvj_6JCFBQKIDdXCke6iaRk20poX0hs3Huzh6DKn5Nx8EL7fqKR3I8Kc45f5ILXuP5DYf4NbA8EK52pxMmHawrSZj683w",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -185,15 +344,57 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"customerId\": 1,\r\n  \"orderProducts\": [\r\n    {\r\n      \"productId\": 50,\r\n      \"quantity\": 15\r\n    }\r\n  ]\r\n}"
+							"raw": "{\r\n  \"customerId\": 1,\r\n  \"orderProducts\": [\r\n    {\r\n      \"productId\": 2,\r\n      \"quantity\": 20\r\n    }\r\n  ]\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/createOrder",
+							"raw": "http://127.0.0.1:52265/createOrder",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "52265",
+							"path": [
+								"createOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addOrder 8085",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJSc0hraEVxeXdsdkFUZG1hSWZaRm0yN1pVa2tZaVczQnl2Q1dDNzg2UlFrIn0.eyJleHAiOjE2NDQyMzAxODQsImlhdCI6MTY0NDIyOTg4NCwianRpIjoiNzc3YTUwZTQtNTEzZS00OTRjLTk3MzEtN2UyMDQ0M2U2NWU5IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL2N1c3RvbWVyc2VydmljZSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiIyNTY1NjQ1NS03ZDYzLTQ0YzctOTdhZC1mNzEwYzE5MGZkOTEiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJjdXN0b21lcmFwaSIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1jdXN0b21lcnNlcnZpY2UiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiVVNFUiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJjbGllbnRIb3N0IjoiMTI3LjAuMC4xIiwiY2xpZW50SWQiOiJjdXN0b21lcmFwaSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoic2VydmljZS1hY2NvdW50LWN1c3RvbWVyYXBpIiwiY2xpZW50QWRkcmVzcyI6IjEyNy4wLjAuMSJ9.QM_h9f1m935eNmI2lYGP2f3QEHsD1pOKayMQflAd9C1UpTkYPYmFx_MzjzeQACdvxSMXsudYp9WL2dV2eF73WK0y8CqcakX5VkwYj4xnT-307X2VrgFqfSenlSG1IoMxZZ856X-KQfySvTEvTMEWup_dUsLcUCo7LorPUaIusFsvFj9zlfFjQxPSsAa1hfyarIFVL_Ew2Vx3rGrPubmWbrBaI4wKxQtc84I5HFOw6i2UjMplpNje7DDUT5xUMmb-UoqDT7wbbQThmp0lwcGbJv31cT-_oyEVocctNU9sJRwG3Lgz-OEuX8slWCWNsO5AvbumtOkOwAY4sD5GiVr17A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customerId\": 110,\r\n  \"orderProducts\": [\r\n    {\r\n      \"productId\": 50,\r\n      \"quantity\": 1\r\n    }\r\n  ]\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8085/createOrder",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8082",
+							"port": "8085",
 							"path": [
 								"createOrder"
 							]
@@ -220,7 +421,7 @@
 							"raw": "{\r\n    \"customerName\": \"Mainak\",\r\n    \"modeOfPayment\": \"cash\",\r\n    \"customerAddress\": \"Kolkata\",\r\n    \"debitAvailable\":20000.00\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/getOrder/67",
+							"raw": "http://localhost:8082/getOrder/111",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -228,7 +429,7 @@
 							"port": "8082",
 							"path": [
 								"getOrder",
-								"67"
+								"111"
 							]
 						}
 					},
@@ -250,7 +451,7 @@
 							"raw": "{\r\n    \"customerName\": \"Mainak\",\r\n    \"modeOfPayment\": \"cash\",\r\n    \"customerAddress\": \"Kolkata\",\r\n    \"debitAvailable\":20000.00\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8082/deleteOrder/67",
+							"raw": "http://localhost:8082/deleteOrder/71",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -258,7 +459,133 @@
 							"port": "8082",
 							"path": [
 								"deleteOrder",
-								"67"
+								"71"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/auth/realms/orderservice/.well-known/openid-configuration",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"realms",
+								"orderservice",
+								".well-known",
+								"openid-configuration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gettoken_ord",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "orderservapi",
+									"type": "default"
+								},
+								{
+									"key": "client_secret",
+									"value": "7rkSl5JCw3wiye5Veb3KV2yjsiWWRQau",
+									"type": "default"
+								},
+								{
+									"key": "scope",
+									"value": "openid",
+									"type": "default"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/realms/orderservice/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"realms",
+								"orderservice",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gettoken_cust",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "customerapi",
+									"type": "default"
+								},
+								{
+									"key": "client_secret",
+									"value": "4ZNrTZeTDDAWRyOQGtTQyLuomzj7CKWW",
+									"type": "default"
+								},
+								{
+									"key": "scope",
+									"value": "openid",
+									"type": "default"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/realms/customerservice/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"realms",
+								"customerservice",
+								"protocol",
+								"openid-connect",
+								"token"
 							]
 						}
 					},
