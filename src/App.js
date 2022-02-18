@@ -4,14 +4,16 @@ import SlideShow from "./SlideShow";
 import Footer from './Footer';
 
 import './Styles.css';
-import Header from './Header';
 
 import Product from './Product';
+
+import HeaderComponent from './HeaderComponent';
 
 function App() {
   return (
     <div>
-       <Product/>
+      <Product/>
+
     </div>  
   );
 }

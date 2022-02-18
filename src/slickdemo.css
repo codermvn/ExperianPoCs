@@ -1,0 +1,33 @@
+.wdt{  
+    width: 80%  !important;  
+}  
+.img  
+{  
+    height: 600px !important;  
+}  
+.img1 {
+    height: 600px !important;
+    width: 20%  !important;  
+}
+.wdt1{  
+    width: 3000px  !important;  
+} 
+ 
+.img2 {
+        height: 600px !important;
+    width: 35%  !important;  
+}
+.wdt2{  
+    width: 2000px  !important;  
+} 
+
+.img3 {
+    height: 600px !important;
+    width: 30%  !important;  
+}
+.wdt3{  
+    width: 2000px  !important;  
+} 
+.text{
+    text-align: right;
+}
