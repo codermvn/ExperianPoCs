@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: order
-        image: dasmainak/ordservice:1.5
+        image: dvarshney86/order-service-api:1.0
         ports:
         - containerPort: 8085
